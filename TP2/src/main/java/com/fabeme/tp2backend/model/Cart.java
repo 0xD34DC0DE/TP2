@@ -7,25 +7,25 @@ import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "relationClass" })
-@Table(name = "compte", catalog = "tp2")
-public class Compte {
+@Table(name = "cart", catalog = "tp2")
+public class Cart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "compte_id")
-	private Integer compteId;
+	@Column(name = "id")
+	private Integer cartId;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "compte_id")
+	@JoinColumn(name = "id")
 	private Set<Product> productList;
 
 	@Column(name = "amount", columnDefinition = "Decimal(10,2) default '0.00'")
 	private double amount;
 
-	@Column(name = "cart_status", columnDefinition = "Varchar(10) default 'ACTIF'")
+	@Column(name = "status", columnDefinition = "Varchar(10) default 'ACTIVE'")
 	private String status;
 
-	public Compte() {
+	public Cart() {
 	}
 
 	public String getStatus() {
@@ -40,12 +40,12 @@ public class Compte {
 		this.amount = amount;
 	}
 
-	public Integer getCompteId() {
-		return compteId;
+	public Integer getCartId() {
+		return cartId;
 	}
 
-	public void setCompteId(Integer compteId) {
-		this.compteId = compteId;
+	public void setCartId(Integer cartId) {
+		this.cartId = cartId;
 	}
 
 	public Set<Product> getProductList() {
@@ -62,7 +62,7 @@ public class Compte {
 
 	@Override
 	public String toString() {
-		return "Compte [compteId=" + compteId + ", productList=" + productList + ", amount=" + amount + ", status="
+		return "Cart [cartId=" + cartId + ", productList=" + productList + ", amount=" + amount + ", status="
 				+ status + "]";
 	}
 
@@ -73,7 +73,7 @@ public class Compte {
 		long temp;
 		temp = Double.doubleToLongBits(amount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((compteId == null) ? 0 : compteId.hashCode());
+		result = prime * result + ((cartId == null) ? 0 : cartId.hashCode());
 		result = prime * result + ((productList == null) ? 0 : productList.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
@@ -87,13 +87,13 @@ public class Compte {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Compte other = (Compte) obj;
+		Cart other = (Cart) obj;
 		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
 			return false;
-		if (compteId == null) {
-			if (other.compteId != null)
+		if (cartId == null) {
+			if (other.cartId != null)
 				return false;
-		} else if (!compteId.equals(other.compteId))
+		} else if (!cartId.equals(other.cartId))
 			return false;
 		if (productList == null) {
 			if (other.productList != null)

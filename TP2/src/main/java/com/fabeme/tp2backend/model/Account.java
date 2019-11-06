@@ -9,31 +9,30 @@ public class Account {
 
 	@Id
 	@Column(name = "email")
-	protected String email;
-	protected String password;
-	protected String lastName;
-	protected String firstName;
-	protected String adresse;
-	protected String phone;
-	protected String type;
-	@Column(name = "account_status", columnDefinition = "Varchar(10) default 'ACTIF'")
-	protected String status;
+	private String email;
+	private String password;
+	private String lastName;
+	private String firstName;
+	private String address;
+	private String phone;
+	String type;
+	@Column(name = "account_status", columnDefinition = "Varchar(10) default 'ACTIVE'")
+	private String status;
 	
 
-	public Account() {
+	Account() {
 
 	}
 	
 
-	
-	public String getAdresse() {
-		return adresse;
+	public String getAddress() {
+		return address;
 	}
 
 
 
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 
@@ -104,7 +103,7 @@ public class Account {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -126,10 +125,10 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
-		if (adresse == null) {
-			if (other.adresse != null)
+		if (address == null) {
+			if (other.address != null)
 				return false;
-		} else if (!adresse.equals(other.adresse))
+		} else if (!address.equals(other.address))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -168,7 +167,7 @@ public class Account {
 	@Override
 	public String toString() {
 		return "Account [email=" + email + ", password=" + password + ", lastName=" + lastName + ", firstName="
-				+ firstName + ", adresse=" + adresse + ", phone=" + phone + ", type=" + type + ", status=" + status
+				+ firstName + ", address=" + address + ", phone=" + phone + ", type=" + type + ", status=" + status
 				+ "]";
 	}
 

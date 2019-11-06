@@ -7,23 +7,23 @@ import javax.persistence.*;
 @Table(name = "client", catalog = "tp2")
 public class Client extends Account {
 	@OneToOne
-	private Compte compte;
+	private Cart cart;
 	
 	@Column(name = "balance", columnDefinition = "Decimal(10,2) default '0.00'")
 	private double balance;
 
 	public Client() {
-		type = "CLIENT";
+		type = AccountTypes.CLIENT.toString();
 	}
 
 
-	public Compte getCompte() {
-		return compte;
+	public Cart getCart() {
+		return cart;
 	}
 
 
-	public void setCompte(Compte compte) {
-		this.compte = compte;
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
 
@@ -37,7 +37,7 @@ public class Client extends Account {
 
 	@Override
 	public String toString() {
-		return "Client [compte=" + compte + ", balance=" + balance + "]";
+		return "Client [compte=" + cart + ", balance=" + balance + "]";
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class Client extends Account {
 		long temp;
 		temp = Double.doubleToLongBits(balance);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((compte == null) ? 0 : compte.hashCode());
+		result = prime * result + ((cart == null) ? 0 : cart.hashCode());
 		return result;
 	}
 
@@ -62,10 +62,10 @@ public class Client extends Account {
 		Client other = (Client) obj;
 		if (Double.doubleToLongBits(balance) != Double.doubleToLongBits(other.balance))
 			return false;
-		if (compte == null) {
-			if (other.compte != null)
+		if (cart == null) {
+			if (other.cart != null)
 				return false;
-		} else if (!compte.equals(other.compte))
+		} else if (!cart.equals(other.cart))
 			return false;
 		return true;
 	}

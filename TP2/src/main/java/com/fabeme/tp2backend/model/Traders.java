@@ -10,19 +10,19 @@ import javax.persistence.Table;
 @Table(name = "traders", catalog = "tp2")
 public class Traders extends Account {
 	@OneToOne
-	private Compte compte;
+	private Cart cart;
 	private double balance;
 
 	public Traders() {
-		type = "TRADER";
+		type = AccountTypes.TRADER.toString();
 	}
 
-	public Compte getCompte() {
-		return compte;
+	public Cart getCart() {
+		return cart;
 	}
 
-	public void setCompte(Compte compte) {
-		this.compte = compte;
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
 	public double getBalance() {
@@ -35,7 +35,7 @@ public class Traders extends Account {
 
 	@Override
 	public String toString() {
-		return "Traders [compte=" + compte + ", balance=" + balance + "]";
+		return "Traders [compte=" + cart + ", balance=" + balance + "]";
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class Traders extends Account {
 		long temp;
 		temp = Double.doubleToLongBits(balance);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((compte == null) ? 0 : compte.hashCode());
+		result = prime * result + ((cart == null) ? 0 : cart.hashCode());
 		return result;
 	}
 
@@ -60,10 +60,10 @@ public class Traders extends Account {
 		Traders other = (Traders) obj;
 		if (Double.doubleToLongBits(balance) != Double.doubleToLongBits(other.balance))
 			return false;
-		if (compte == null) {
-			if (other.compte != null)
+		if (cart == null) {
+			if (other.cart != null)
 				return false;
-		} else if (!compte.equals(other.compte))
+		} else if (!cart.equals(other.cart))
 			return false;
 		return true;
 	}

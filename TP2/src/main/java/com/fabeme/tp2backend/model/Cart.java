@@ -7,16 +7,22 @@ import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "relationClass" })
-@Table(name = "cart", catalog = "tp2")
+@Table(name = "carts", catalog = "tp2")
 public class Cart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	@Column(name = "cart_id")
 	private Integer cartId;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "id")
+	/*@JoinTable(
+			name = "course_like",
+			joinColumns = @JoinColumn(name = "student_id"),
+			inverseJoinColumns = @JoinColumn(name = "course_id"))*/
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "cart_product",
+			joinColumns = @JoinColumn(name = "cart_id"),
+			inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> productList;
 
 	@Column(name = "amount", columnDefinition = "Decimal(10,2) default '0.00'")

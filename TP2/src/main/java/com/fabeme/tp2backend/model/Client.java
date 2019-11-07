@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @PrimaryKeyJoinColumn(referencedColumnName = "email")
-@Table(name = "client", catalog = "tp2")
+@Table(name = "clients", catalog = "tp2")
 public class Client extends Account {
 	@OneToOne
 	private Cart cart;
@@ -13,7 +13,7 @@ public class Client extends Account {
 	private double balance;
 
 	public Client() {
-		type = AccountTypes.CLIENT.toString();
+		type = AccountTypes.CLIENT;
 	}
 
 

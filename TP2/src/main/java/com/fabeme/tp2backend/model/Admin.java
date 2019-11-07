@@ -6,7 +6,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "admin", catalog = "tp2")
+@Table(name = "admins", catalog = "tp2")
 @PrimaryKeyJoinColumn(referencedColumnName = "email")
 public class Admin extends Account {
 
@@ -15,7 +15,7 @@ public class Admin extends Account {
 	private String adminLevel;
 
 	public Admin() {
-		type =  AccountTypes.ADMIN.toString();
+		type =  AccountTypes.ADMIN;
 	}
 
 	@Override

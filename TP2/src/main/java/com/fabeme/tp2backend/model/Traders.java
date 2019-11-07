@@ -14,7 +14,7 @@ public class Traders extends Account {
 	private double balance;
 
 	public Traders() {
-		type = AccountTypes.TRADER.toString();
+		type = AccountTypes.TRADER;
 	}
 
 	public Cart getCart() {

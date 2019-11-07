@@ -3,7 +3,7 @@ package com.fabeme.tp2backend.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "account", catalog = "tp2")
+@Table(name = "accounts", catalog = "tp2")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Account {
 

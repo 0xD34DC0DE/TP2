@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "relationClass" })
-@Table(name = "product", catalog = "tp2")
+@Table(name = "products", catalog = "tp2")
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,6 +14,7 @@ public class Product {
 	private Integer productId;
 	@Column(name = "product_name")
 	private String productName;
+
 	private double price;
 	@Column(name = "available_stock", columnDefinition = "integer default 100")
 	private int availableStock;

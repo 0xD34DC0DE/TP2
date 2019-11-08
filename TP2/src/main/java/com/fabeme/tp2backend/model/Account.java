@@ -1,5 +1,8 @@
 package com.fabeme.tp2backend.model;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,56 +19,45 @@ public class Account {
 	private String address;
 	private String phone;
 	String type;
-	@Column(name = "account_status", columnDefinition = "Varchar(10) default 'ACTIVE'")
-	private String status;
+
+	@Column(name = "status", columnDefinition = "varchar(10)")
+	private String status = "ACTIVE";
 	
 
 	Account() {
 
 	}
-	
+
 
 	public String getAddress() {
 		return address;
 	}
 
-
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-
 
 	public String getPhone() {
 		return phone;
 	}
 
-
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-
 
 	public String getType() {
 		return type;
 	}
 
-
-
 	public void setType(String type) {
 		this.type = type;
 	}
 
-
+	public String getStatus() {return status;}
 
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-
 
 	public String getEmail() {
 		return email;

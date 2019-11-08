@@ -3,7 +3,8 @@ package com.fabeme.tp2backend.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "relationClass" })
@@ -12,26 +13,22 @@ public class Cart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "cart_id")
+	@Column(name = "id")
 	private Integer cartId;
 
-	/*@JoinTable(
-			name = "course_like",
-			joinColumns = @JoinColumn(name = "student_id"),
-			inverseJoinColumns = @JoinColumn(name = "course_id"))*/
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "cart_product",
-			joinColumns = @JoinColumn(name = "cart_id"),
-			inverseJoinColumns = @JoinColumn(name = "product_id"))
-	private Set<Product> productList;
+	@JoinTable(name = "carts_products",
+			joinColumns = @JoinColumn(name = "cart_id", referencedColumnName="id"),
+			inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName="id"))
+	private ArrayList<Product> productList;
 
 	@Column(name = "amount", columnDefinition = "Decimal(10,2) default '0.00'")
 	private double amount;
 
 	@Column(name = "status", columnDefinition = "Varchar(10) default 'ACTIVE'")
-	private String status;
+	private String status = "ACTIVE";
 
-	public Cart() {
+	Cart() {
 	}
 
 	public String getStatus() {
@@ -54,12 +51,18 @@ public class Cart {
 		this.cartId = cartId;
 	}
 
-	public Set<Product> getProductList() {
+	public List<Product> getProductList() {
 		return productList;
 	}
 
-	public void setProductList(Set<Product> productList) {
+	public void setProductList(ArrayList<Product> productList) {
 		this.productList = productList;
+	}
+
+	public void addProduct(Product product) {
+		System.out.println(product);
+		productList.add(new Product(product));
+		System.out.println(productList);
 	}
 
 	public void setStatus(String status) {

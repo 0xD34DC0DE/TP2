@@ -8,35 +8,45 @@ import javax.persistence.*;
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "relationClass" })
 @Table(name = "products", catalog = "tp2")
 public class Product {
+
+
 	@Id
+	@Column(name = "id", unique = true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "product_id")
-	private Integer productId;
-	@Column(name = "product_name")
-	private String productName;
+	private Integer id;
+
+	@Column(name = "name")
+	private String name;
 
 	private double price;
 	@Column(name = "available_stock", columnDefinition = "integer default 100")
-	private int availableStock;
+	private int availableStock = 100;
 
 	public Product() {
 
 	}
 
-	public Integer getProductId() {
-		return productId;
+	public Product(Product product) {
+		this.id = product.getId();
+		this.name = product.getName();
+		this.price = product.getPrice();
+		this.availableStock = product.getAvailableStock();
 	}
 
-	public void setProductId(Integer productId) {
-		this.productId = productId;
+	public Integer getId() {
+		return id;
 	}
 
-	public String getProductName() {
-		return productName;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public double getPrice() {
@@ -63,8 +73,8 @@ public class Product {
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
-		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -81,22 +91,22 @@ public class Product {
 			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
-		if (productId == null) {
-			if (other.productId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!productId.equals(other.productId))
+		} else if (!id.equals(other.id))
 			return false;
-		if (productName == null) {
-			if (other.productName != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!productName.equals(other.productName))
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", price=" + price
+		return "Product [productId=" + id + ", productName=" + name + ", price=" + price
 				+ ", availableStock=" + availableStock + "]";
 	}
 

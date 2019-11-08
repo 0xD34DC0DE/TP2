@@ -6,26 +6,26 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(referencedColumnName = "email")
 @Table(name = "clients", catalog = "tp2")
 public class Client extends Account {
-	@OneToOne
+
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "id")
 	private Cart cart;
 	
 	@Column(name = "balance", columnDefinition = "Decimal(10,2) default '0.00'")
-	private double balance;
+	private double balance = 0.0;
 
 	public Client() {
 		type = AccountTypes.CLIENT;
+		cart = new Cart();
 	}
-
 
 	public Cart getCart() {
 		return cart;
 	}
 
-
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
-
 
 	public double getBalance() {
 		return balance;

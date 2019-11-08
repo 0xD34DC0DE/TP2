@@ -1,0 +1,53 @@
+[
+    //A QUOI LES ADMINISTRATEUR RESSEMBLE
+{
+    "email": "admin@mail.com",
+    "password": "admin123",
+    "lastName": "admin",
+    "firstName": "admin",
+    "adresse": "admin adresse 123",
+    "phone": "6678997885",
+    "type": "ADMIN"
+},
+{
+    "email": "bemin@mail.com",
+    "password": "admin1235",
+    "lastName": "admin3",
+    "firstName": "admin3",
+    "adresse": "admin adresse 12354",
+    "phone": "6678997885",
+    "type": "ADMIN"
+},
+
+// A QUOI LES CLIENT/ACHETEUR/COMPTE/PRODUIT RESSEMBLE
+{
+    "email": "client@mail.com",
+    "password": "client",
+    "lastName": "client",
+    "firstName": "client",
+    "adresse": "client adresse 123",
+    "phone": "6678997885",
+    "type": "CLIENT",
+    "compte": {
+        "compteId": 1,
+        "productList": [
+            {
+                "productId": 2,
+                "productName": "poisson",
+                "price": 9.99,
+                "availableStock": 100
+            },
+            {
+                "productId": 3,
+                "productName": "boeuf",
+                "price": 8.99,
+                "availableStock": 100
+            }
+        ],
+        "amount": 0.0,
+        "status": "ACTIF"
+    },
+    "balance": 0.0
+}
+
+]

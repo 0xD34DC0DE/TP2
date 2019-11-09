@@ -26,8 +26,10 @@ export class NewUserComponent implements OnInit {
       firstName: ['',Validators.required],
       lastName: ['',Validators.required],
       email:['',[Validators.required, Validators.email]],
-      drinkPreference: ['', Validators.required],
-      hobbies: this.formBuilder.array([])
+      password: ['',Validators.required],
+      adresse: ['',Validators.required],
+      phone: ['',Validators.required],
+      role: ['',Validators.required],
     });
   }
 
@@ -42,7 +44,7 @@ export class NewUserComponent implements OnInit {
       formValue['password'],
       formValue['adresse'],
       formValue['phone'],
-      formValue['role'],
+      formValue['role']
     );
     //this.userService.addUser(newUser);
     this.router.navigate(['/users']);

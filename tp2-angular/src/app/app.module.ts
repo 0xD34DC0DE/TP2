@@ -5,17 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { ProductViewComponent } from './components/product-view/product-view.component';
-import { NewUserComponent } from './components/new-user/new-user.component';
 import { AcceuilComponent } from './components/acceuil/acceuil.component';
 import { PageNonTrouveComponent } from './components/page-non-trouve/page-non-trouve.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductViewComponent,
-    NewUserComponent,
     AcceuilComponent,
-    PageNonTrouveComponent
+    PageNonTrouveComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

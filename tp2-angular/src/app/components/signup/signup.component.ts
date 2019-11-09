@@ -5,12 +5,12 @@ import { Router } from '@angular/router';
 import { SignUpForm } from '../../models/sign-up';
 
 @Component({
-  selector: 'app-new-user',
-  templateUrl: './new-user.component.html',
-  styleUrls: ['./new-user.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class NewUserComponent implements OnInit {
-  
+export class SignupComponent implements OnInit {
+
   userForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -58,4 +58,5 @@ export class NewUserComponent implements OnInit {
     const newHobbyControl = this.formBuilder.control('',Validators.required);
     this.getHobbies().push(newHobbyControl);
   }
+
 }

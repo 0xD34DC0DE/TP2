@@ -1,0 +1,6 @@
+footer{
+    /*background-color: rgba(6, 6, 122, 0.89);*/
+    background: rgb(168,168,205);
+    background: linear-gradient(90deg, rgba(168,168,205,1) 1%, rgba(26,26,196,1) 35%, rgba(18,162,191,1) 98%);
+    padding-top:30px;
+}

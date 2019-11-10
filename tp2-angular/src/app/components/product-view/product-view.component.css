@@ -1,0 +1,50 @@
+.inputNumber{
+	width:17%;
+	height: 30px;
+	border-radius: 5px;
+	border: 1px solid grey;
+	padding-left: 11px;
+	text-align: center;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+}
+
+.card{
+	width: 90%;
+	background-color: white;
+	color: #0F0F67;
+}
+.row{
+	margin-bottom: 100px;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 52%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #282923;
+    border-radius: 3px;
+  }
+  .overlay:hover{
+      opacity: 1;
+  }
+  .text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .card-img-top{
+	height: 250px;
+}	

@@ -1,16 +1,19 @@
 <div id="outerDiv">
+  <p class="animated infinite pulse slow text-center">See our new offers</p>
   <hr>
-  <h1 class="text-center">CREATE A NEW ACCOUNT</h1>
+  <h1 class="text-center animated bounceIn slower delay-1s">CREATE A NEW ACCOUNT</h1>
   <hr>
   <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
     <label for="firstName" class="animated  bounceIn slower delay-1s">Prenom</label>
-    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="firstName" formControlName="firstName">
+    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="firstName"
+      formControlName="firstName">
     <label for="lastName" class="animated  bounceIn slower delay-1s">Nom</label>
     <input type="text" class="form-control animated  bounceIn slower delay-1s" id="lastName" formControlName="lastName">
     <label for="email" class="animated  bounceIn slower delay-1s">email</label>
     <input type="text" class="form-control animated  bounceIn slower delay-1s" id="email" formControlName="email">
     <label for="password" class="animated  bounceIn slower delay-1s">password</label>
-    <input type="password" class="form-control animated  bounceIn slower delay-1s" id="password" formControlName="password">
+    <input type="password" class="form-control animated  bounceIn slower delay-1s" id="password"
+      formControlName="password">
     <label for="adresse" class="animated  bounceIn slower delay-1s">adresse</label>
     <input type="text" class="form-control animated  bounceIn slower delay-1s" id="adresse" formControlName="adresse">
     <label for="phone" class="animated  bounceIn slower delay-1s">phone</label>
@@ -21,7 +24,6 @@
       <option *ngFor="let role of roleSet">{{role}}</option>
     </select>
 
-    <button class="text-center animated swing slow" type="submit"
-      [disabled]="userForm.invalid">Soumettre</button>
+    <button class="text-center animated swing slow" type="submit" [disabled]="userForm.invalid">Soumettre</button>
   </form>
 </div>

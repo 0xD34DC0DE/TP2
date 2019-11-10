@@ -12,6 +12,10 @@ import { SignUpForm } from '../../models/sign-up';
 export class SignupComponent implements OnInit {
 
   userForm: FormGroup;
+  roleSet:string[] = [
+    'client',
+    'trader'
+  ]
 
   constructor(private formBuilder: FormBuilder,
               private traderService: TraderService,
@@ -42,12 +46,14 @@ export class SignupComponent implements OnInit {
       formValue['lastName'],
       formValue['email'],
       formValue['password'],
-      formValue['adresse'],
       formValue['phone'],
-      formValue['role']
+      formValue['role'],
+      formValue['adresse']
     );
+    console.log(newUser);
+    
     //this.userService.addUser(newUser);
-    this.router.navigate(['/users']);
+    //this.router.navigate(['/users']);
   }
 
   getHobbies(){

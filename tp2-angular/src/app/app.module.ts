@@ -8,6 +8,8 @@ import { ProductViewComponent } from './components/product-view/product-view.com
 import { AcceuilComponent } from './components/acceuil/acceuil.component';
 import { PageNonTrouveComponent } from './components/page-non-trouve/page-non-trouve.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { ClientViewComponent } from './components/client-view/client-view.component';
+import { LoginViewComponent } from './components/login-view/login-view.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { SignupComponent } from './components/signup/signup.component';
     ProductViewComponent,
     AcceuilComponent,
     PageNonTrouveComponent,
-    SignupComponent
+    SignupComponent,
+    ClientViewComponent,
+    LoginViewComponent
   ],
   imports: [
     BrowserModule,

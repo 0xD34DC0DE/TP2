@@ -1,0 +1,41 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  width: 40%;
+  margin-top: 20px;
+}
+
+input {
+  width: 40%;
+  height: 60px;
+  border-radius: 5px;
+  border: 1px solid #698169;
+  padding-left: 1%;
+}
+
+input[type="submit"] {
+  width: 20%;
+  margin-top: 50px;
+  background-color: #2FAF2F;
+  color: white;
+  font-size: 20px;
+  transition-duration: 2s;
+}
+
+input[type="submit"]:hover {
+  background-color: white;
+  color: #2FAF2F;
+  border: 1px solid #2FAF2F;
+  width: 30%;
+}
+
+div {
+  background: rgb(51, 51, 56);
+  background: linear-gradient(90deg, rgba(51, 51, 56, 1) 1%, rgba(9, 9, 121, 1) 35%, rgba(14, 119, 140, 1) 98%);
+  height: 900px;
+  color: white;
+}

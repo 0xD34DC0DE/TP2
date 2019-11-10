@@ -4,12 +4,14 @@ import { ProductViewComponent } from './components/product-view/product-view.com
 import { AcceuilComponent } from './components/acceuil/acceuil.component';
 import { PageNonTrouveComponent } from './components/page-non-trouve/page-non-trouve.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { LoginViewComponent } from './components/login-view/login-view.component';
 
 
 const routes: Routes = [
   {path:'',redirectTo:'/acceuil', pathMatch: 'full'},
   {path:'catalogue',component: ProductViewComponent},
   {path:'signup',component: SignupComponent},
+  {path:'login',component: LoginViewComponent},
   {path:'acceuil',component: AcceuilComponent},
   {path:'**',component:PageNonTrouveComponent}
 ];

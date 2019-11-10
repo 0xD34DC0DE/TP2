@@ -1,43 +1,27 @@
-<hr>
-<h1 class="text-secondary text-center">CREATE A NEW ACCOUNT</h1>
-<hr>
-<div class="col-sm-6 col-sm-offset-2 container">
+<div id="outerDiv">
+  <hr>
+  <h1 class="text-center">CREATE A NEW ACCOUNT</h1>
+  <hr>
   <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
-    <div class="form-group">
-      <label for="firstName">Prenom</label>
-      <input type="text" class="form-control" id="firstName" formControlName="firstName">
-    </div>
+    <label for="firstName" class="animated  bounceIn slower delay-1s">Prenom</label>
+    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="firstName" formControlName="firstName">
+    <label for="lastName" class="animated  bounceIn slower delay-1s">Nom</label>
+    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="lastName" formControlName="lastName">
+    <label for="email" class="animated  bounceIn slower delay-1s">email</label>
+    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="email" formControlName="email">
+    <label for="password" class="animated  bounceIn slower delay-1s">password</label>
+    <input type="password" class="form-control animated  bounceIn slower delay-1s" id="password" formControlName="password">
+    <label for="adresse" class="animated  bounceIn slower delay-1s">adresse</label>
+    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="adresse" formControlName="adresse">
+    <label for="phone" class="animated  bounceIn slower delay-1s">phone</label>
+    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="phone" formControlName="phone">
 
-    <div class="form-group">
-      <label for="lastName">Nom</label>
-      <input type="text" class="form-control" id="lastName" formControlName="lastName">
-    </div>
-    <div class="form-group">
-      <label for="email">email</label>
-      <input type="text" class="form-control" id="email" formControlName="email">
-    </div>
-    <div class="form-group">
-      <label for="password">password</label>
-      <input type="password" class="form-control" id="password" formControlName="password">
-    </div>
-    <div class="form-group">
-      <label for="adresse">adresse</label>
-      <input type="text" class="form-control" id="adresse" formControlName="adresse">
-    </div>
-    <div class="form-group">
-      <label for="phone">phone</label>
-      <input type="text" class="form-control" id="phone" formControlName="phone">
-    </div>
-    <div class="form-group">
+    <select class="custom-select animated  bounceIn slower delay-1s" formControlName="role" id="inputGroupSelect01">
+      <option selected>Choose...</option>
+      <option *ngFor="let role of roleSet">{{role}}</option>
+    </select>
 
-      <select class="custom-select" formControlName="role" id="inputGroupSelect01">
-        <option selected>Choose...</option>
-        <option *ngFor="let role of roleSet">{{role}}</option>
-      </select>
-    </div>
-
-
-    <button class="btn btn-primary text-center mybtn w-75 ml-5 mt-3" type="submit"
+    <button class="text-center animated swing slow" type="submit"
       [disabled]="userForm.invalid">Soumettre</button>
   </form>
 </div>

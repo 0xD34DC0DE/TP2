@@ -55,14 +55,4 @@ export class SignupComponent implements OnInit {
     //this.userService.addUser(newUser);
     //this.router.navigate(['/users']);
   }
-
-  getHobbies(){
-    return this.userForm.get('hobbies') as FormArray;
-  }
-
-  onAddHobby(){
-    const newHobbyControl = this.formBuilder.control('',Validators.required);
-    this.getHobbies().push(newHobbyControl);
-  }
-
 }

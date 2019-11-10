@@ -1,14 +1,17 @@
-<p class="animated infinite bounceInRight delay-4s">See our new offers</p>
-<div>
-  <hr>
-  <h1 class="text-center">Log in</h1>
-  <hr>
-  <form>
-    <label for="email">Email</label>
-    <input type="text" id="email">
-    <label for="password">Password</label>
-    <input type="password" id="password">
+<div id="outerDiv">
+  <p class="animated infinite pulse slow text-center">See our new offers</p>
+  <div id="innerDiv">
 
-    <input type="submit" id="submit" value="Log In">
-  </form>
+    <hr>
+    <h1 class="text-center animated bounceIn slower delay-1s">Log in</h1>
+    <hr>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
+      <label for="email" class="animated  bounceIn slower delay-1s">Email</label>
+      <input class="animated  bounceIn slower delay-1s" type="text" id="email" formControlName="email">
+      <label for="password" class="animated  bounceIn slower delay-1s">Password</label>
+      <input type="password" class="animated  bounceIn slower delay-1s" id="password" formControlName="password">
+
+      <input type="submit" class="animated swing slow" id="submit" value="Log In" [disabled]="userForm.invalid">
+    </form>
+  </div>
 </div>

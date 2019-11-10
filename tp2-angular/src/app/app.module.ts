@@ -10,6 +10,7 @@ import { PageNonTrouveComponent } from './components/page-non-trouve/page-non-tr
 import { SignupComponent } from './components/signup/signup.component';
 import { ClientViewComponent } from './components/client-view/client-view.component';
 import { LoginViewComponent } from './components/login-view/login-view.component';
+import { CatalogueComponent } from './components/catalogue/catalogue.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoginViewComponent } from './components/login-view/login-view.component
     PageNonTrouveComponent,
     SignupComponent,
     ClientViewComponent,
-    LoginViewComponent
+    LoginViewComponent,
+    CatalogueComponent
   ],
   imports: [
     BrowserModule,

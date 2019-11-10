@@ -1,0 +1,2 @@
+INSERT INTO tp2.roles(name) VALUES('ROLE_TRADER');
+INSERT INTO tp2.roles(name) VALUES('ROLE_ADMIN');

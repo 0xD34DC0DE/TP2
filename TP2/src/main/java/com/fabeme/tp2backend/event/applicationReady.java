@@ -52,52 +52,21 @@ public class applicationReady {
         URL jsonFileURL = getResourcesURL("defaultAdmin.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Admin defaultAdmin = null;
+
+        SignUpForm adminSignUpForm = null;
         try {
-            defaultAdmin = objectMapper.readValue(jsonFileURL, Admin.class);
+            adminSignUpForm = objectMapper.readValue(jsonFileURL, SignUpForm.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if(defaultAdmin != null){
-            //read JSON like DOM Parser
-            JsonNode rootNode = null;
-
-            try {
-                rootNode = objectMapper.readTree(jsonFileURL);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // Maybe that instead of using this ugly map I could just do a roleRepository.findByName ?
-            JsonNode roleNode = null;
-            if (rootNode != null) {
-                roleNode = rootNode.path("roles");
-
-                if(roleNode != null)
-                {
-                    Iterator<JsonNode> elements = roleNode.elements();
-                    Set<String> adminRoleSet = new HashSet<>();
-
-                    // Search every string in the string array of roles inside the json
-                    while(elements.hasNext()){
-                        JsonNode roleNodeElement = elements.next();
-                        adminRoleSet.add(roleNodeElement.toString().replace("\"", ""));
-                    }
-
-                    authRestAPIs.registerUser(new SignUpForm(
-                            defaultAdmin.getFirstName(),
-                            defaultAdmin.getLastName(),
-                            defaultAdmin.getEmail(),
-                            defaultAdmin.getPhone(),
-                            adminRoleSet,
-                            defaultAdmin.getPassword(),
-                            defaultAdmin.getAddress()));
-                }
-            }
-        } else {
-            throw new RuntimeException("Admin is null");
+        if (adminSignUpForm != null) {
+            authRestAPIs.registerUser(adminSignUpForm);
+        } else
+        {
+            throw new RuntimeException("Error while calling authRestAPI for adminSignUpForm");
         }
+
     }
 
     private URL getResourcesURL(String ressourceFileName) {

@@ -1,5 +1,7 @@
 package com.fabeme.tp2backend.message.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -29,13 +31,13 @@ public class SignUpForm {
 
 	private String address;
 
-	public SignUpForm(@NotBlank @Size(min = 3, max = 50) String firstName,
-					  @NotBlank @Size(min = 3, max = 50) String lastName,
-					  @NotBlank @Size(max = 60) @Email String email,
-					  String phone,
-					  Set<String> role,
-					  @NotBlank @Size(min = 6, max = 40) String password,
-					  String address) {
+	public SignUpForm(@JsonProperty("firstName") @NotBlank @Size(min = 3, max = 50) String firstName,
+					  @JsonProperty("lastName") @NotBlank @Size(min = 3, max = 50) String lastName,
+					  @JsonProperty("email") @NotBlank @Size(max = 60) @Email String email,
+					  @JsonProperty("phone") String phone,
+					  @JsonProperty("roles") Set<String> role,
+					  @JsonProperty("password") @NotBlank @Size(min = 6, max = 40) String password,
+					  @JsonProperty("address") String address) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

@@ -13,23 +13,20 @@ import java.util.Optional;
 @RequestMapping("/rest/product")
 public class ProductResource {
 
-    final private ProductRepository productRepository;
-
-    public ProductResource(@Autowired ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    @Autowired
+    ProductRepository productRepository;
 
     @PostMapping("/add")
 	public Optional<Product> create(@RequestBody final Product product) {
 		productRepository.save(product);
-        return productRepository.findById(product.getId());
+		return productRepository.findById(product.getId());
 	}
     
     @GetMapping("/{id}")
     public Optional<Product> findById(@PathVariable final Integer id) {
     	return productRepository.findById(id);
     }
-
+    
 
 	@GetMapping("/all")
     public List<Product> findAll() {

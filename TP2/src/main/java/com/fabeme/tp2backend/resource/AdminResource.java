@@ -12,11 +12,8 @@ import java.util.List;
 @RequestMapping("/rest/admin")
 public class AdminResource {
 
-    final private AdminRepository adminRepository;
-
-    public AdminResource(@Autowired AdminRepository adminRepository) {
-        this.adminRepository = adminRepository;
-    }
+    @Autowired
+    AdminRepository adminRepository;
 
     @PostMapping("/add")
 	public Admin create(@RequestBody final Admin admin) {
@@ -28,7 +25,6 @@ public class AdminResource {
     public Admin findById(@PathVariable final String id) {
     	return adminRepository.findByEmail(id);
     }
-    
 
 	@GetMapping("/all")
     public List<Admin> findAll() {

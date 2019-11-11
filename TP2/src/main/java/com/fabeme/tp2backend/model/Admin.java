@@ -1,9 +1,16 @@
 package com.fabeme.tp2backend.model;
 
+import com.fabeme.tp2backend.repository.RoleRepository;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "admins", catalog = "tp2")
@@ -14,8 +21,22 @@ public class Admin extends Account {
 	@Column(name = "admin_level", columnDefinition = "Varchar(10)")
 	private String adminLevel = "ACTIVE";
 
-	public Admin() {
-		type =  AccountTypes.ADMIN;
+	public Admin() {}
+
+	public Admin(String email, String password, String lastName, String firstName, String address, String phone) {
+		super(email, password, lastName, firstName, address, phone);
+	}
+
+	@JsonCreator
+	public Admin(
+			@JsonProperty("email") String email,
+			@JsonProperty("password") String password,
+			@JsonProperty("lastName") String lastName,
+			@JsonProperty("firstName") String firstName,
+			@JsonProperty("address") String address,
+			@JsonProperty("phone") String phone,
+			@JsonProperty("roles") String[] roles) {
+		super(email, password, lastName, firstName, address, phone);
 	}
 
 	public String getAdminLevel() { return adminLevel; }
@@ -24,7 +45,9 @@ public class Admin extends Account {
 
 	@Override
 	public String toString() {
-		return "Admin [adminLevel=" + adminLevel + "]";
+		return "Admin{" +
+				"adminLevel='" + adminLevel + '\'' +
+				", roles=" + roles +
+				'}';
 	}
-
 }

@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Table(name = "products", catalog = "tp2")
 public class Product {
 
-
 	@Id
 	@Column(name = "id", unique = true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +22,6 @@ public class Product {
 	private int availableStock = 100;
 
 	public Product() {
-
 	}
 
 	public Product(Product product) {

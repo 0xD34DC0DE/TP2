@@ -4,27 +4,22 @@ import com.fabeme.tp2backend.message.request.SignUpForm;
 import com.fabeme.tp2backend.model.Admin;
 import com.fabeme.tp2backend.model.Role;
 import com.fabeme.tp2backend.model.RoleName;
-import com.fabeme.tp2backend.repository.AdminRepository;
 import com.fabeme.tp2backend.repository.RoleRepository;
 import com.fabeme.tp2backend.resource.AuthRestAPIs;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import static java.nio.file.Files.readString;
 
 @Component
 public class applicationReady {

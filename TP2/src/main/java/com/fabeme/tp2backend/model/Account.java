@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "accounts", catalog = "tp2", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
+@Table(name = "accounts", catalog = "tp2")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Account {
 

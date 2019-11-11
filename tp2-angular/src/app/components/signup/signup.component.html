@@ -1,25 +1,25 @@
 <div id="outerDiv">
   <p class="animated infinite pulse slow text-center">See our new offers</p>
   <hr>
-  <h1 class="text-center animated bounceIn slower delay-1s">CREATE A NEW ACCOUNT</h1>
+  <h1 class="text-center animated bounceIn fast">CREATE A NEW ACCOUNT</h1>
   <hr>
   <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
-    <label for="firstName" class="animated  bounceIn slower delay-1s">Prenom</label>
-    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="firstName"
+    <label for="firstName">Prenom</label>
+    <input type="text" class="form-control animated  pulse fast" id="firstName"
       formControlName="firstName">
-    <label for="lastName" class="animated  bounceIn slower delay-1s">Nom</label>
-    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="lastName" formControlName="lastName">
-    <label for="email" class="animated  bounceIn slower delay-1s">email</label>
-    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="email" formControlName="email">
-    <label for="password" class="animated  bounceIn slower delay-1s">password</label>
-    <input type="password" class="form-control animated  bounceIn slower delay-1s" id="password"
+    <label for="lastName">Nom</label>
+    <input type="text" class="form-control animated  pulse fast" id="lastName" formControlName="lastName">
+    <label for="email">email</label>
+    <input type="text" class="form-control animated  pulse fast" id="email" formControlName="email">
+    <label for="password">password</label>
+    <input type="password" class="form-control animated pulse fast" id="password"
       formControlName="password">
-    <label for="adresse" class="animated  bounceIn slower delay-1s">adresse</label>
-    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="adresse" formControlName="adresse">
-    <label for="phone" class="animated  bounceIn slower delay-1s">phone</label>
-    <input type="text" class="form-control animated  bounceIn slower delay-1s" id="phone" formControlName="phone">
+    <label for="adresse">adresse</label>
+    <input type="text" class="form-control animated  pulse fast" id="adresse" formControlName="adresse">
+    <label for="phone">phone</label>
+    <input type="text" class="form-control animated pulse fast" id="phone" formControlName="phone">
 
-    <select class="custom-select animated  bounceIn slower delay-1s" formControlName="role" id="inputGroupSelect01">
+    <select class="custom-select animated pulse fast" formControlName="role" id="inputGroupSelect01">
       <option selected>Choose...</option>
       <option *ngFor="let role of roleSet">{{role}}</option>
     </select>

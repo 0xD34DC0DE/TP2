@@ -21,8 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -43,6 +42,18 @@ public class AuthRestAPIs {
 
 	@Autowired
 	JwtProvider jwtProvider;
+
+	private static final Map<String, RoleName> nameIndex = new HashMap<>(RoleName.values().length);
+	// Static initializer
+	static {
+		for (RoleName roleName : RoleName.values()) {
+			nameIndex.put(roleName.name(), roleName);
+		}
+	}
+	// Method to lookup Role name by name returning an optional so we dont need a try catch
+	public static Optional<RoleName> lookupRoleNameByName(String name) {
+		return Optional.of(nameIndex.get(name));
+	}
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -69,32 +80,40 @@ public class AuthRestAPIs {
 				signUpRequest.getLastName(), signUpRequest.getFirstName(), signUpRequest.getAddress(),
 				signUpRequest.getPhone());
 
-		// TRANSFERRING ACCOUNT ROLES STRING TO ENUM
-		Set<String> strRoles = signUpRequest.getRole();
-		Set<Role> roles = new HashSet<>();
-
-		strRoles.forEach(role -> {
+		// TRANSFERRING ACCOUNT ROLES STRING TO ENUM deez caps tho
+		Set<String> requestRolesArr = signUpRequest.getRole();
+		Set<Role> userRoles = new HashSet<>();
+		/*
+		requestRolesArr.forEach(roleStr -> {
+			lookupRoleNameByName(roleStr).ifPresentOrElse(roleName -> {
+				roleRepository.findByName(roleName).ifPresent(userRoles::add);
+			}, () -> {
+				return new ResponseEntity<String>("Fail -> Role: " + roleStr + " is within the valid roles", HttpStatus.BAD_REQUEST);
+			} );
+		});
+		*/
+		requestRolesArr.forEach(role -> {
 			switch (role) {
 			case "admin":
 				Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Admin Role not found."));
-				roles.add(adminRole);
+				userRoles.add(adminRole);
 
 				break;
 			case "trader":
 				Role traderRole = roleRepository.findByName(RoleName.ROLE_TRADER)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Trader Role not found."));
-				roles.add(traderRole);
+				userRoles.add(traderRole);
 
 				break;
 			default:
 				Role userRole = roleRepository.findByName(RoleName.ROLE_CLIENT)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Client Role not found."));
-				roles.add(userRole);
+				userRoles.add(userRole);
 			}
 		});
 
-		user.setRoles(roles);
+		user.setRoles(userRoles);
 		accountRepository.save(user);
 
 		return ResponseEntity.ok().body("User registered successfully!");

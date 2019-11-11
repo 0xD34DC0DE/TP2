@@ -1,1 +1,61 @@
-<p>manage-traders works!</p>
+<div class='card'>
+        <div class='card-header'>
+          {{pageTitle}}
+        </div>
+        <div class='card-body'>
+          <div class='row'>
+            <div class='col-md-2'>Filtrer par:</div>
+            <div class='col-md-4'>
+              <input type='text'
+                     [(ngModel)]='listFilter' />
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-md-6'>
+              <h4>Filtrer par: {{listFilter}}</h4>
+            </div>
+          </div>
+          <div class='table-responsive'>
+            <table class='table'
+                   *ngIf='traders && traders.length'>
+              <thead>
+                <tr>
+                  <th>
+                    <button class='btn btn-primary'
+                            (click)='toggleImage()'>
+                      {{showImage ? 'Hide' : 'Show'}} Image
+                    </button>
+                  </th>
+                  <th>Trader_Id</th>
+                  <th>firstName</th>
+                  <th>lastName</th>
+                  <th>Type</th>
+                  <th>balance</th>
+                  <th>status</th>
+                  <th colspan="2">Access</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let trader of filteredTraders'>
+                  <td>{{ trader.email}}</td>
+                  <!--   <td>{{ product.productId | lowercase | convertToSpaces: '-' }}</td>-->
+                  <td>{{ trader.firstName }}</td>
+                  <td>{{ trader.lastName }}</td>
+                  <td>{{ trader.address }}</td>
+                  <td>{{ trader.type }}</td>
+                  <td>{{ trader.balance }}</td>
+                  <td>{{ trader.status }}</td>
+                  <td><button class="btn btn-success">Edit</button></td>
+                  <td><button class="btn btn-danger">Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+              <hr>
+              <a routerLink="/managing" class="btn btn-primary">Go back</a>
+              <hr>
+          </div>
+        </div>
+      
+      </div>

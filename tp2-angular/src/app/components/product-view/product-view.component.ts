@@ -40,7 +40,7 @@ export class ProductViewComponent implements OnInit {
       "description": "Le meilleur cafe a vie",
       "imageUrl": "../../../assets/CaféGold.jpg",
       "isRender": false
-    },
+    }
 
   ]
   constructor() { }

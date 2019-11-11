@@ -8,10 +8,14 @@ import { ProductViewComponent } from './components/product-view/product-view.com
 import { AcceuilComponent } from './components/acceuil/acceuil.component';
 import { PageNonTrouveComponent } from './components/page-non-trouve/page-non-trouve.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { ClientViewComponent } from './components/client-view/client-view.component';
 import { LoginViewComponent } from './components/login-view/login-view.component';
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ManagingComponent } from './components/managing/managing.component';
+import { ManageAdminComponent } from './components/manage-admin/manage-admin.component';
+import { ManageTradersComponent } from './components/manage-traders/manage-traders.component';
+import { ManageProductsComponent } from './components/manage-products/manage-products.component';
 
 @NgModule({
   declarations: [
@@ -20,10 +24,14 @@ import { FooterComponent } from './components/footer/footer.component';
     AcceuilComponent,
     PageNonTrouveComponent,
     SignupComponent,
-    ClientViewComponent,
     LoginViewComponent,
     CatalogueComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileComponent,
+    ManagingComponent,
+    ManageAdminComponent,
+    ManageTradersComponent,
+    ManageProductsComponent,
   ],
   imports: [
     BrowserModule,

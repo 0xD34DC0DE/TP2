@@ -52,7 +52,7 @@ public class AuthRestAPIs {
 	}
 	// Method to lookup Role name by name returning an optional so we dont need a try catch
 	public static Optional<RoleName> lookupRoleNameByName(String name) {
-		return Optional.of(nameIndex.get(name));
+		return Optional.ofNullable(nameIndex.get("ROLE_" + name.toUpperCase()));
 	}
 
 	@PostMapping("/signin")
@@ -83,35 +83,27 @@ public class AuthRestAPIs {
 		// TRANSFERRING ACCOUNT ROLES STRING TO ENUM deez caps tho
 		Set<String> requestRolesArr = signUpRequest.getRole();
 		Set<Role> userRoles = new HashSet<>();
-		/*
-		requestRolesArr.forEach(roleStr -> {
-			lookupRoleNameByName(roleStr).ifPresentOrElse(roleName -> {
-				roleRepository.findByName(roleName).ifPresent(userRoles::add);
-			}, () -> {
-				return new ResponseEntity<String>("Fail -> Role: " + roleStr + " is within the valid roles", HttpStatus.BAD_REQUEST);
-			} );
-		});
-		*/
-		requestRolesArr.forEach(role -> {
-			switch (role) {
-			case "admin":
-				Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Admin Role not found."));
-				userRoles.add(adminRole);
 
-				break;
-			case "trader":
-				Role traderRole = roleRepository.findByName(RoleName.ROLE_TRADER)
-						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Trader Role not found."));
-				userRoles.add(traderRole);
+		if(requestRolesArr != null) {
+			for (String roleStr : requestRolesArr) {
+				Optional<RoleName> roleName = lookupRoleNameByName(roleStr);
 
-				break;
-			default:
-				Role userRole = roleRepository.findByName(RoleName.ROLE_CLIENT)
-						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Client Role not found."));
-				userRoles.add(userRole);
+				if(roleName.isPresent()) {
+					Optional<Role> role = roleRepository.findByName(roleName.get());
+
+					if(role.isPresent()) {
+						userRoles.add(role.get());
+					} else {
+						return new ResponseEntity<String>("Fail -> '" + roleStr + "' is not within the role repository", HttpStatus.BAD_REQUEST);
+					}
+
+				} else {
+					return new ResponseEntity<String>("Fail -> '" + roleStr + "' is not within the possible roles (RoleName enum)", HttpStatus.BAD_REQUEST);
+				}
 			}
-		});
+		} else {
+			return new ResponseEntity<String>("Fail -> Key 'roles' is not present (null) make sure the key exist", HttpStatus.BAD_REQUEST);
+		}
 
 		user.setRoles(userRoles);
 		accountRepository.save(user);

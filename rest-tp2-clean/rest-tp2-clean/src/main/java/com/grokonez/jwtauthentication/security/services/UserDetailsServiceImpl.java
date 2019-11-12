@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.grokonez.jwtauthentication.model.Account;
 import com.grokonez.jwtauthentication.repository.AccountRepository;
 
-@Service
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

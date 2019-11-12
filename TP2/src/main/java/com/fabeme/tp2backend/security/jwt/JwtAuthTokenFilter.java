@@ -47,7 +47,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            logger.error("Can NOT set user authentication -> Message: {}", e);
+            logger.error(String.format("Cannot set user authentication -> Message: %s", e));
         }
 
         filterChain.doFilter(request, response);
@@ -56,7 +56,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
     private String getJwt(HttpServletRequest request) {
     	// TROUVER LE TOKEN EN  SASSURANT QUIL CONTIENT BEARER POUR ENSUITE LENLEVER 
         String authHeader = request.getHeader("Authorization");
-        	
+        System.out.println("This is the Authorization -> " + authHeader);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
         	return authHeader.replace("Bearer ","");
         }

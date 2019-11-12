@@ -11,12 +11,12 @@ public class Account {
 
 	@Id
 	@Column(name = "email")
-	private String email;
-	private String password;
-	private String lastName;
-	private String firstName;
-	private String address;
-	private String phone;
+	protected String email;
+	protected String password;
+	protected String lastName;
+	protected String firstName;
+	protected String address;
+	protected String phone;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles",
 			joinColumns = @JoinColumn(name = "email", referencedColumnName = "email"),
@@ -24,9 +24,9 @@ public class Account {
 	protected Set<Role> roles = new HashSet<>();
 
 	@Column(name = "status", columnDefinition = "varchar(10) default 'ACTIVE'")
-	private String status = "ACTIVE";
+	protected String status = "ACTIVE";
 
-	Account() {}
+	public Account() {}
 
 	public Account(String email, String password, String lastName, String firstName, String address, String phone) {
 		this.email = email;

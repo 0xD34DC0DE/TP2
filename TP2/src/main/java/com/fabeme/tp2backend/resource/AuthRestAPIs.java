@@ -3,12 +3,11 @@ package com.fabeme.tp2backend.resource;
 import com.fabeme.tp2backend.message.request.LoginForm;
 import com.fabeme.tp2backend.message.request.SignUpForm;
 import com.fabeme.tp2backend.message.response.JwtResponse;
-import com.fabeme.tp2backend.model.Account;
-import com.fabeme.tp2backend.model.Role;
-import com.fabeme.tp2backend.model.RoleName;
-import com.fabeme.tp2backend.model.Trader;
+import com.fabeme.tp2backend.model.*;
 import com.fabeme.tp2backend.repository.AccountRepository;
+import com.fabeme.tp2backend.repository.AdminRepository;
 import com.fabeme.tp2backend.repository.RoleRepository;
+import com.fabeme.tp2backend.repository.TraderRepository;
 import com.fabeme.tp2backend.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +32,12 @@ public class AuthRestAPIs {
 
 	@Autowired
 	AccountRepository accountRepository;
+
+	@Autowired
+	AdminRepository adminRepository;
+
+	@Autowired
+	TraderRepository traderRepository;
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -106,7 +111,14 @@ public class AuthRestAPIs {
 		}
 
 		user.setRoles(userRoles);
-		accountRepository.save(user);
+
+		if(userRoles.contains(RoleName.ROLE_ADMIN)) {
+			adminRepository.save(new Admin(user, "someLevel"));
+		} else if (userRoles.contains(RoleName.ROLE_TRADER)) {
+			traderRepository.save(new Trader(user));
+		} else {
+			accountRepository.save(user);
+		}
 
 		return ResponseEntity.ok().body("User registered successfully!");
 	}

@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,12 +20,17 @@ public class Admin extends Account {
 
 	//Admin level is used for what ? I don't see the need for that
 	@Column(name = "admin_level", columnDefinition = "Varchar(10)")
-	private String adminLevel = "ACTIVE";
+	private String adminLevel = "someLevel";
 
 	public Admin() {}
 
 	public Admin(String email, String password, String lastName, String firstName, String address, String phone) {
 		super(email, password, lastName, firstName, address, phone);
+	}
+
+	public Admin(Account account, String level) {
+		super(account.email, account.password, account.lastName, account.firstName, account.address, account.phone);
+		this.adminLevel = level;
 	}
 
 	@JsonCreator

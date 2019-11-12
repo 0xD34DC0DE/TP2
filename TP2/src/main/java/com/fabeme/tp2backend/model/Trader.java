@@ -19,6 +19,10 @@ public class Trader extends Account {
 		super(email, password, lastName, firstName, address, phone);
 	}
 
+	public Trader(Account account) {
+		super(account.email, account.password, account.lastName, account.firstName, account.address, account.phone);
+	}
+
 	public Set<Product> getProducts() {
 		return products;
 	}

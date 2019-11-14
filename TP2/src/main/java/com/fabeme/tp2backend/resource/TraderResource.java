@@ -39,7 +39,7 @@ public class TraderResource {
     }
 	
 	@DeleteMapping("/{id}")
-    public void update(@PathVariable final Integer id) {
+    public void delete(@PathVariable final Integer id) {
         traderRepository.deleteById(id);
     }
 }

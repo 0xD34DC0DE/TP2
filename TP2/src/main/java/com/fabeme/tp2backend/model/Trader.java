@@ -21,6 +21,7 @@ public class Trader extends Account {
 
 	public Trader(Account account) {
 		super(account.email, account.password, account.lastName, account.firstName, account.address, account.phone);
+		super.roles = account.roles;
 	}
 
 	public Set<Product> getProducts() {

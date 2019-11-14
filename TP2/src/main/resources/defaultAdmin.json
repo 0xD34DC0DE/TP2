@@ -5,5 +5,5 @@
   "lastName": "Admin",
   "password": "reallyStrongPassword",
   "phone": "123-456-7890",
-  "roles": ["admin", "trader"]
+  "roles": ["admin"]
 }

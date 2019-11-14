@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 public class OwnerService {
 
     public boolean isRecordOwner(Authentication authentication, String id) {
-        return authentication.getPrincipal().equals(id);
+        return authentication.getName().equals(id);
     }
 }

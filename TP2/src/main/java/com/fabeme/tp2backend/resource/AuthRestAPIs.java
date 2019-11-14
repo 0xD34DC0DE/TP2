@@ -112,9 +112,12 @@ public class AuthRestAPIs {
 
 		user.setRoles(userRoles);
 
-		if(userRoles.contains(RoleName.ROLE_ADMIN)) {
+		Role traderRole = roleRepository.findByName(RoleName.ROLE_TRADER).orElseThrow(() -> {throw new RuntimeException("ROLE_TRADER NOT FOUND in  role repository");});
+		Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN).orElseThrow(() -> {throw new RuntimeException("ROLE_ADMIN NOT FOUND in  role repository");});
+
+		if(userRoles.contains(adminRole)) {
 			adminRepository.save(new Admin(user, "someLevel"));
-		} else if (userRoles.contains(RoleName.ROLE_TRADER)) {
+		} else if (userRoles.contains(traderRole)) {
 			traderRepository.save(new Trader(user));
 		} else {
 			accountRepository.save(user);

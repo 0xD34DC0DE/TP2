@@ -9,6 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class JwtProvider {
@@ -25,8 +27,13 @@ public class JwtProvider {
 
         UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
 
+        Map<String, Object> claimsMap = new HashMap<>();
+        //TODO : remove toArray()[0] when we remove the role Array
+        claimsMap.put("rol",userPrincipal.getAuthorities().toArray()[0].toString());
+
         return Jwts.builder()
 		                .setSubject((userPrincipal.getUsername()))
+                        .addClaims(claimsMap)
 		                .setIssuedAt(new Date())
 		                .setExpiration(new Date((new Date()).getTime() + jwtExpiration*1000))
 		                .signWith(SignatureAlgorithm.HS512, jwtSecret)

@@ -9,6 +9,7 @@ import { JwtResponse } from '../models/responses/jwt-response';
 import { AuthService } from './auth.service';
 
 import { Router } from '@angular/router';
+import { SignUpForm } from '../models/sign-up';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -20,7 +21,7 @@ export class AuthenticationService {
   login(email: string, password: string): Observable<boolean> {
     return this.getToken(email, password).pipe(
       map(response => {
-        if (response.accessToken) {
+        if (response && response.accessToken) {
           localStorage.setItem('token', response.accessToken); // Set the token for jwt-helper
           console.log(response.accessToken);
           return true;
@@ -37,13 +38,17 @@ export class AuthenticationService {
     //angular2-jwt should inject the JWT token in the request
     if (this.auth.isAuthenticated()) {
       return this.http.get<Account>(`${environment.adminUrl}/${email}`).pipe(map((account: Account) => {
-        localStorage.setItem('email', account.email); // Set the token for jwt-helper
+        localStorage.setItem('email', account.email); // Set the email
         console.log(account);
 
         return account;
       }));
     }
 
+  }
+
+  signup(form: SignUpForm) : Observable<string> {
+    return this.http.post<string>(`${environment.authApiUrl}/signup`, form);
   }
 
   logout() {

@@ -4,6 +4,5 @@ export interface Product{
     name:string;
     price:number;
     availableStock:string;
-    imageUrl:string;
-    isRender:boolean;
+    available:boolean;
 }

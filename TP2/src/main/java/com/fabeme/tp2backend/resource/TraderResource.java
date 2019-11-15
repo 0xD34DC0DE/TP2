@@ -6,6 +6,7 @@ import com.fabeme.tp2backend.repository.ProductRepository;
 import com.fabeme.tp2backend.repository.TraderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
+@Transactional
 @RequestMapping("/rest/traders")
 public class TraderResource {
 
@@ -27,6 +29,7 @@ public class TraderResource {
         traderRepository.save(trader);
 		return traderRepository.findByEmail(trader.getEmail());
 	}
+
     @PreAuthorize("@ownerService.isRecordOwner(authentication, #id) or hasRole('AMDIN')")
     @GetMapping("/{id}")
     public Optional<Trader> findByEmail(@PathVariable final String id) {
@@ -52,9 +55,10 @@ public class TraderResource {
         return Optional.empty();
     }
 
+    @PreAuthorize("@ownerService.isRecordOwner(authentication, #id)")
     @GetMapping("/{id}/products")
-    public Set<Product> getTraderProduct(@PathVariable final Integer id) {
-        Optional<Trader> trader = traderRepository.findById(id);
+    public Set<Product> getTraderProduct(@PathVariable final String id) {
+        Optional<Trader> trader = traderRepository.findByEmail(id);
         return trader.map(Trader::getProducts).orElse(null);
     }
 
@@ -62,15 +66,17 @@ public class TraderResource {
     public List<Trader> findAll() {
         return traderRepository.findAll();
     }
-	
-	@PutMapping("/load")
-    public Optional<Trader> update(@RequestBody final Trader trader) {
+
+    @PreAuthorize("@ownerService.isRecordOwner(authentication, #id) or hasRole('ROLE_ADMIN')")
+	@PutMapping("/{id}")
+    public Optional<Trader> update(@PathVariable final String id, @RequestBody final Trader trader) {
         traderRepository.save(trader);
         return traderRepository.findByEmail(trader.getEmail());
     }
-	
+
+    @PreAuthorize("@ownerService.isRecordOwner(authentication, #id) or hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{id}")
-    public void delete(@PathVariable final Integer id) {
-        traderRepository.deleteById(id);
+    public void delete(@PathVariable final String id) {
+        traderRepository.deleteByEmail(id);
     }
 }

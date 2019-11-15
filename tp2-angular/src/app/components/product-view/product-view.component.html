@@ -1,12 +1,12 @@
 <div class="col-lg-4 col-md-6 mb-4 col-sm-12" *ngFor="let product of productList">
   <div class="card">
-    <img class="card-img-top" [src]="product.imageUrl" alt="Card image cap">
+    <img class="card-img-top" src="./../../../assets/CafeGold.jpg" alt="Card image cap">
     <div class="overlay">
       <div class="text">{{product.description}}</div>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{product.productName}}</h5>
-      <p class="mb-0">id#: {{product.productId}}</p>
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="mb-0">id#: {{product.id}}</p>
       <p class="mt-0">prix: {{product.price.toFixed(2)}}$</p>
       <span class="span">Quantité:</span>
       <input class="inputNumber" type="number" value="0">

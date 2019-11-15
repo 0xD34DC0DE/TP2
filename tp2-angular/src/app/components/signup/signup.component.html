@@ -12,14 +12,13 @@
     <label for="email">email</label>
     <input type="text" class="form-control animated  pulse fast" id="email" formControlName="email">
     <label for="password">password</label>
-    <input type="password" class="form-control animated pulse fast" id="password"
-      formControlName="password">
+    <input type="password" class="form-control animated pulse fast" id="password" formControlName="password">
     <label for="adresse">adresse</label>
     <input type="text" class="form-control animated  pulse fast" id="adresse" formControlName="adresse">
     <label for="phone">phone</label>
     <input type="text" class="form-control animated pulse fast" id="phone" formControlName="phone">
 
-    <select class="custom-select animated pulse fast" formControlName="role" id="inputGroupSelect01">
+    <select class="custom-select animated pulse fast" formControlName="roles" id="inputGroupSelect01">
       <option selected>Choose...</option>
       <option *ngFor="let role of roleSet">{{role}}</option>
     </select>

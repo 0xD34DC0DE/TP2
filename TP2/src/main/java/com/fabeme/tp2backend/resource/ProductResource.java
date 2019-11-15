@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/rest/products")
 public class ProductResource {
 
@@ -29,10 +28,16 @@ public class ProductResource {
     	return productRepository.findById(id);
     }
 
-    @PreAuthorize("permitAll()")
+
 	@GetMapping("/all")
     public List<Product> findAll() {
         return productRepository.findAll();
+    }
+
+
+    @GetMapping("/allAvailable")
+    public Product[] findAllAvailable() {
+        return productRepository.findAllByAvailableTrue();
     }
 	
 	@PutMapping("/load")

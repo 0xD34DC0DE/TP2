@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { TraderService } from '../../services/trader.service';
 import { Router } from '@angular/router';
 import { SignUpForm } from '../../models/sign-up';
+import { AuthenticationService } from 'src/app/services/authentification.service';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +20,8 @@ export class SignupComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private traderService: TraderService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.initForm();
@@ -33,7 +35,7 @@ export class SignupComponent implements OnInit {
       password: ['',Validators.required],
       adresse: ['',Validators.required],
       phone: ['',Validators.required],
-      role: ['',Validators.required],
+      roles: ['',Validators.required],
     });
   }
 
@@ -47,10 +49,16 @@ export class SignupComponent implements OnInit {
       formValue['email'],
       formValue['password'],
       formValue['phone'],
-      formValue['role'],
+      [formValue['roles']],
       formValue['adresse']
     );
     console.log(newUser);
+
+    this.authService.signup(newUser).subscribe((message:string) => {
+      console.log(message);
+      this.router.navigate(['/acceuil']);
+    });
+
     
     //this.userService.addUser(newUser);
     //this.router.navigate(['/users']);

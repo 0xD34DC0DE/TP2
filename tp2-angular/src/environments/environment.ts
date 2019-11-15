@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   authApiUrl: "http://localhost:8081/api/auth",
   adminUrl: "http://localhost:8081/rest/accounts",
-  productsUrl: "http://localhost:8081/rest/products"
+  productsUrl: "http://localhost:8081/rest/products",
+  traderUrl: "http://localhost:8081/rest/traders"
 };
 
 /*

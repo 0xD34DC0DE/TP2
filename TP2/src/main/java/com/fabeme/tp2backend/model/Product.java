@@ -22,6 +22,8 @@ public class Product {
 	@Column(name = "available_stock", columnDefinition = "integer default 100")
 	private int availableStock = 100;
 
+	private boolean available = true;
+
 	public Product() {
 	}
 
@@ -30,6 +32,7 @@ public class Product {
 		this.name = product.getName();
 		this.price = product.getPrice();
 		this.availableStock = product.getAvailableStock();
+		this.available = product.available;
 	}
 
 	public Integer getId() {
@@ -62,6 +65,14 @@ public class Product {
 
 	public void setAvailableStock(int availableStock) {
 		this.availableStock = availableStock;
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 	@Override

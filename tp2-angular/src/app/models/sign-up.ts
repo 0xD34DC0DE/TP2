@@ -4,6 +4,6 @@ export class SignUpForm {
         private email: string,
         private password: string,
         private phone: string,
-        private role: string[],
+        private roles: string[],
         private adresse: string) { }
 }

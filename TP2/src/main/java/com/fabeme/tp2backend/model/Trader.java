@@ -9,7 +9,7 @@ import java.util.TreeSet;
 @Table(name = "traders", catalog = "tp2")
 public class Trader extends Account {
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(columnDefinition = "email", referencedColumnName = "email")
 	private Set<Product> products = new TreeSet<Product>();
 

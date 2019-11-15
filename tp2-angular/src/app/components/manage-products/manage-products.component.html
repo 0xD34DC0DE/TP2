@@ -3,29 +3,12 @@
           {{pageTitle}}
         </div>
         <div class='card-body'>
-          <div class='row'>
-            <div class='col-md-2'>Filtrer par:</div>
-            <div class='col-md-4'>
-              <input type='text'
-                     [(ngModel)]='listFilter' />
-            </div>
-          </div>
-          <div class='row'>
-            <div class='col-md-6'>
-              <h4>Filtrer par: {{listFilter}}</h4>
-            </div>
-          </div>
+          
           <div class='table-responsive'>
-            <table class='table'
-                   *ngIf='products && products.length'>
+            <table class='table' *ngIf='products && products.length'>
               <thead>
                 <tr>
-                  <th>
-                    <button class='btn btn-primary'
-                            (click)='toggleImage()'>
-                      {{showImage ? 'Hide' : 'Show'}} Image
-                    </button>
-                  </th>
+                  <th>Image</th>
                   <th>Product</th>
                   <th>Code</th>
                   <th>Price</th>
@@ -33,16 +16,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor='let product of filteredProducts'>
+                <tr *ngFor='let product of products'>
                   <td>
-                    <img *ngIf='showImage'
+                    <img
                          [src]="'../../../assets/CafeGold.jpg'"
                          [title]='product.name'
                          [style.width.px]='imageWidth'
                          [style.margin.px]='imageMargin'>
                   </td>
                   <td>{{ product.name }}</td>
-                  <!--   <td>{{ product.productId | lowercase | convertToSpaces: '-' }}</td>-->
                   <td>{{ product.id }}</td>
                   <td>{{ product.price | currency:'CAD':'symbol':'1.2-2'}}</td>
                   

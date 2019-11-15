@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Traders } from 'src/app/models/account';
+import { TraderService } from 'src/app/services/trader.service';
 import { Status } from 'src/app/models/status-enum';
 
 @Component({
@@ -12,55 +13,35 @@ export class ManageTradersComponent implements OnInit {
   pageTitle: string = 'Liste des cochonneries';
   imageWidth: number = 55;
   imageMargin: number = 2;
-  showImage: boolean = true;
 
-  _listFilter: string;
+  traders: Traders[];
 
-  get listFilter(): string {
-    return this._listFilter;
-  }
-
-  set listFilter(value: string) {
-    this._listFilter = value;
-    this.filteredTraders = this.listFilter ? this.performFilter(this.listFilter) : this.traders;
-  }
-
-  filteredTraders: Traders[];
-
-
-  traders: Traders[] = [
-    {
-      "email": "toto@mail.com",
-      "firstName": "toto",
-      "lastName": "toto",
-      "address": "toto adresse 6773",
-      "phone": "5147889878",
-      "type": "TRADER",
-      "status": Status.ACTIF,
-      "cart": null,
-      "roles": [],
-      "balance": 5.99
-    }
-  ];
-  constructor() {
-    this.filteredTraders = this.traders;
-    this.listFilter = '';
-  }
-
-  performFilter(filterBy: string): Traders[] {
-    filterBy = filterBy.toLocaleLowerCase();
-    return this.traders.filter((trader: Traders) =>
-      trader.email.toLocaleLowerCase().indexOf(filterBy) !== -1);
-  }
-
-  toggleImage(): void {
-    this.showImage = !this.showImage;
-  }
+  constructor(private traderService: TraderService) {}
 
   ngOnInit(): void {
     console.log('In OnInit');
-    console.log(this.traders);
-    
+    this.traderService.getAllTraders().subscribe((traders: Traders[]) => { 
+      this.traders = traders;
+      console.log(this.traders);
+    });
+  }
+
+  blockTrader(trader: Traders) {
+    trader.status = Status.INACTIVE;
+    this.traderService.updateTrader(trader).subscribe((trader: Traders) => {
+      console.log(trader);
+    })
+  }
+
+  unblockTrader(trader: Traders) {
+    trader.status = Status.ACTIVE;
+    this.traderService.updateTrader(trader).subscribe((trader: Traders) => {
+      console.log(trader);
+    })
+  }
+
+  deleteTrader(email: string) {
+    this.traderService.deleteTrader(email).subscribe();
   }
 
 }

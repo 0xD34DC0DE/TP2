@@ -13,7 +13,7 @@ export class ProductViewComponent implements OnInit {
   constructor(private traderService: TraderService) { }
 
   ngOnInit() {
-    this.traderService.getAllProducts().subscribe((products: Product[]) => {
+    this.traderService.getAllAvailableProducts().subscribe((products: Product[]) => {
       this.productList = products;
     })
   }

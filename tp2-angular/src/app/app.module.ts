@@ -51,7 +51,7 @@ import { LogoutViewComponent } from './components/logout-view/logout-view.compon
           return localStorage.getItem("token");
         },
         whitelistedDomains: ["localhost:8081"],
-        blacklistedRoutes: ["localhost:8081/api/auth/signin", "localhost:8081/api/auth/register"]
+        blacklistedRoutes: ["localhost:8081/api/auth/signin", "localhost:8081/api/auth/signup"]
       }
     })
   ],

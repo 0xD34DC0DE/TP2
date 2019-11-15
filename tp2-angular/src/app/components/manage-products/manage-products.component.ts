@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { TraderService } from 'src/app/services/trader.service';
 
 @Component({
   selector: 'app-manage-products',
@@ -25,43 +26,9 @@ export class ManageProductsComponent implements OnInit {
 
   filteredProducts: Product[];
 
-  products: Product[] = [
-    {
-      "productId": 545,
-      "traderId": "trekoum@mail.com",
-      "productName": "bebe",
-      "price": 5.99,
-      "description": "Le meilleur cafe a vie",
-      "imageUrl": "../../../assets/CaféGold.jpg",
-      "isRender": false
-    }, {
-      "productId": 545,
-      "traderId": "trekoum@mail.com",
-      "productName": "CaféGold",
-      "price": 5.99,
-      "description": "Le meilleur cafe a vie",
-      "imageUrl": "../../../assets/CaféGold.jpg",
-      "isRender": false
-    }, {
-      "productId": 545,
-      "traderId": "trekoum@mail.com",
-      "productName": "CaféGold",
-      "price": 5.99,
-      "description": "Le meilleur cafe a vie",
-      "imageUrl": "../../../assets/CaféGold.jpg",
-      "isRender": false
-    }, {
-      "productId": 545,
-      "traderId": "trekoum@mail.com",
-      "productName": "CaféGold",
-      "price": 5.99,
-      "description": "Le meilleur cafe a vie",
-      "imageUrl": "../../../assets/CaféGold.jpg",
-      "isRender": false
-    }
-  ];
+  products: Product[];
 
-  constructor() {
+  constructor(private traderService: TraderService) {
     this.filteredProducts = this.products;
     this.listFilter = '';
   }
@@ -69,7 +36,7 @@ export class ManageProductsComponent implements OnInit {
   performFilter(filterBy: string): Product[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.products.filter((product: Product) =>
-      product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+      product.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
   toggleImage(): void {
@@ -78,6 +45,9 @@ export class ManageProductsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('In OnInit');
+    this.traderService.getAllProducts().subscribe((products: Product[]) => {
+      this.products = products;
+    })
   }
 
 }

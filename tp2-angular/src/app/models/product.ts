@@ -1,9 +1,9 @@
 export interface Product{
-    productId:number;
+    id:number;
     traderId:string;
-    productName:string;
+    name:string;
     price:number;
-    description:string;
+    availableStock:string;
     imageUrl:string;
     isRender:boolean;
 }

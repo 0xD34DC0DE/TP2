@@ -29,7 +29,6 @@
                   <th>Product</th>
                   <th>Code</th>
                   <th>Price</th>
-                  <th>Seller</th>
                   <th>5 Star Rating</th>
                 </tr>
               </thead>
@@ -37,16 +36,16 @@
                 <tr *ngFor='let product of filteredProducts'>
                   <td>
                     <img *ngIf='showImage'
-                         [src]='product.imageUrl'
-                         [title]='product.productName'
+                         [src]="'../../../assets/CafeGold.jpg'"
+                         [title]='product.name'
                          [style.width.px]='imageWidth'
                          [style.margin.px]='imageMargin'>
                   </td>
-                  <td>{{ product.productName }}</td>
+                  <td>{{ product.name }}</td>
                   <!--   <td>{{ product.productId | lowercase | convertToSpaces: '-' }}</td>-->
-                  <td>{{ product.productId }}</td>
+                  <td>{{ product.id }}</td>
                   <td>{{ product.price | currency:'CAD':'symbol':'1.2-2'}}</td>
-                  <td>{{ product.traderId }}</td>
+                  
                   <td><button class="btn btn-success">Edit</button></td>
                   <td><button class="btn btn-danger">Delete</button></td>
                 </tr>

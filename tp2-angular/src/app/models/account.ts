@@ -1,13 +1,14 @@
 import { Cart } from './cart';
 import { Status } from './status-enum';
 
-export interface Account{
+export class Account{
     email:string;
     firstName:string;
     lastName:string;
     address:string;
     phone:string;
     type:string;
+    roles: string[];
     status:Status;
 }
 

@@ -1,6 +1,7 @@
 package com.fabeme.tp2backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.persistence.*;
 

@@ -38,6 +38,7 @@ export class ManageTradersComponent implements OnInit {
       "type": "TRADER",
       "status": Status.ACTIF,
       "cart": null,
+      "roles": [],
       "balance": 5.99
     }
   ];

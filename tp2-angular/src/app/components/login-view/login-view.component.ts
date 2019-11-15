@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignInForm } from 'src/app/models/sign-in';
+import { AuthenticationService } from 'src/app/services/authentification.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-view',
@@ -9,29 +11,36 @@ import { SignInForm } from 'src/app/models/sign-in';
   styleUrls: ['./login-view.component.css']
 })
 export class LoginViewComponent implements OnInit {
-  userForm:FormGroup
-  constructor(private formBuilder: FormBuilder,private route:Router) { }
+  userForm: FormGroup
+  constructor(private formBuilder: FormBuilder, private route: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.userForm = this.formBuilder.group({
-      email:['',[Validators.required, Validators.email]],
-      password:['',Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
   }
 
-  onSubmitForm(){
+  onSubmitForm() {
     const formValue = this.userForm.value;
     const newUser = new SignInForm(
       formValue['email'],
       formValue['password']
     );
     console.log(newUser);
-    
-    //this.userService.addUser(newUser);
-    //this.router.navigate(['/users']);
+
+    this.authService.login(formValue['email'], formValue['password']).subscribe((success: boolean) => {
+      if (success) {
+        this.authService.getUserDetails(formValue['email']).subscribe();
+        this.route.navigate(['/acceuil']);
+      } else {
+        console.log("Error could not login");
+      }
+    });
+
   }
 }

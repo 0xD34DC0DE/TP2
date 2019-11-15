@@ -32,6 +32,10 @@ public class Trader extends Account {
 		this.products = products;
 	}
 
+	public void addProducts(Set<Product> products) { this.products.addAll(products); }
+
+	public void addProduct(Product product) { this.products.add(product); }
+
 	@Override
 	public String toString() {
 		return "Traders [products=" + products + "]";

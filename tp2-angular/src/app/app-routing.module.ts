@@ -10,6 +10,7 @@ import { ManagingComponent } from './components/managing/managing.component';
 import { ManageAdminComponent } from './components/manage-admin/manage-admin.component';
 import { ManageProductsComponent } from './components/manage-products/manage-products.component';
 import { ManageTradersComponent } from './components/manage-traders/manage-traders.component';
+import { LogoutViewComponent } from './components/logout-view/logout-view.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'catalogue',component: CatalogueComponent},
   {path:'signup',component: SignupComponent},
   {path:'login',component: LoginViewComponent},
+  {path:'logout',component: LogoutViewComponent},
   {path:'acceuil',component: AcceuilComponent},
   {path:'catalogue',component: AcceuilComponent},
   {path:'profile',component: ProfileComponent},

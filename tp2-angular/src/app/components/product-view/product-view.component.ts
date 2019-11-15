@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { TraderService } from 'src/app/services/trader.service';
 
 @Component({
   selector: 'app-product-view',
@@ -7,45 +8,14 @@ import { Product } from 'src/app/models/product';
   styleUrls: ['./product-view.component.css']
 })
 export class ProductViewComponent implements OnInit {
-  productList: Product[] = [
-    {
-      "productId": 545,
-      "traderId": "trekoum@mail.com",
-      "productName": "CaféGold",
-      "price": 5.99,
-      "description": "Le meilleur cafe a vie",
-      "imageUrl": "../../../assets/CaféGold.jpg",
-      "isRender": false
-    }, {
-      "productId": 545,
-      "traderId": "trekoum@mail.com",
-      "productName": "CaféGold",
-      "price": 5.99,
-      "description": "Le meilleur cafe a vie",
-      "imageUrl": "../../../assets/CaféGold.jpg",
-      "isRender": false
-    }, {
-      "productId": 545,
-      "traderId": "trekoum@mail.com",
-      "productName": "CaféGold",
-      "price": 5.99,
-      "description": "Le meilleur cafe a vie",
-      "imageUrl": "../../../assets/CaféGold.jpg",
-      "isRender": false
-    }, {
-      "productId": 545,
-      "traderId": "trekoum@mail.com",
-      "productName": "CaféGold",
-      "price": 5.99,
-      "description": "Le meilleur cafe a vie",
-      "imageUrl": "../../../assets/CaféGold.jpg",
-      "isRender": false
-    }
+  productList: Product[]; 
 
-  ]
-  constructor() { }
+  constructor(private traderService: TraderService) { }
 
   ngOnInit() {
+    this.traderService.getAllProducts().subscribe((products: Product[]) => {
+      this.productList = products;
+    })
   }
 
 }

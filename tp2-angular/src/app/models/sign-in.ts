@@ -1,4 +1,3 @@
 export class SignInForm {
-    constructor(private email: string,
-        private password: string) { }
+    constructor(private email: string, private password: string) { }
 }

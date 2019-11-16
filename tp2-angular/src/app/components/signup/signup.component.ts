@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
       formValue['email'],
       formValue['password'],
       formValue['phone'],
-      [formValue['roles']],
+      ['trader'],
       formValue['adresse']
     );
     console.log(newUser);

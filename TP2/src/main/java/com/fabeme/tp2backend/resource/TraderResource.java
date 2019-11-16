@@ -1,6 +1,8 @@
 package com.fabeme.tp2backend.resource;
 
+import com.fabeme.tp2backend.message.request.StatusForm;
 import com.fabeme.tp2backend.model.Product;
+import com.fabeme.tp2backend.model.Status;
 import com.fabeme.tp2backend.model.Trader;
 import com.fabeme.tp2backend.repository.ProductRepository;
 import com.fabeme.tp2backend.repository.TraderRepository;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @Transactional
@@ -53,6 +57,29 @@ public class TraderResource {
             };
         }
         return Optional.empty();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}/status")
+    public Boolean setTraderStatus(@PathVariable final String id, @RequestBody final StatusForm statusForm) {
+       Optional<Trader> trader = traderRepository.findByEmail(id);
+       trader.ifPresent((tra -> {
+           tra.setStatus(statusForm.getStatus().toString());
+           traderRepository.save(tra);
+
+           boolean active = statusForm.isStatusActive();
+
+           Set<Product> products = tra.getProducts();
+           Set<Product> updatedProducts = products.stream().map(product -> {
+               product.setAvailable(active);
+               productRepository.save(product);
+               return productRepository.findById(product.getId()).get();
+           }).collect(Collectors.toSet());;
+
+           productRepository.saveAll(updatedProducts);
+       }));
+
+        return trader.isPresent();
     }
 
     @PreAuthorize("@ownerService.isRecordOwner(authentication, #id)")

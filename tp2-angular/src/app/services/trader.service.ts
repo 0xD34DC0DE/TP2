@@ -4,6 +4,7 @@ import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Traders } from '../models/account';
+import { Status } from '../models/status-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class TraderService {
 
   updateTrader(trader: Traders) : Observable<Traders> {
     return this.http.put<Traders>(`${environment.traderUrl}/load`, trader);
+  }
+
+  setStatusTrader(email: string, traderStatus: Status) : Observable<boolean> {
+    return this.http.put<boolean>(`${environment.traderUrl}/${email}/status`, {status: traderStatus});
   }
 
   deleteTrader(email: string) : Observable<void> {

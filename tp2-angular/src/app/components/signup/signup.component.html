@@ -18,11 +18,6 @@
     <label for="phone">phone</label>
     <input type="text" class="form-control animated pulse fast" id="phone" formControlName="phone">
 
-    <select class="custom-select animated pulse fast" formControlName="roles" id="inputGroupSelect01">
-      <option selected>Choose...</option>
-      <option *ngFor="let role of roleSet">{{role}}</option>
-    </select>
-
     <button class="text-center animated swing slow" type="submit" [disabled]="userForm.invalid">Soumettre</button>
   </form>
 </div>

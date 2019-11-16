@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Traders } from 'src/app/models/account';
 import { TraderService } from 'src/app/services/trader.service';
 import { Status } from 'src/app/models/status-enum';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-manage-traders',
@@ -16,32 +17,38 @@ export class ManageTradersComponent implements OnInit {
 
   traders: Traders[];
 
-  constructor(private traderService: TraderService) {}
+  constructor(private traderService: TraderService) { }
 
   ngOnInit(): void {
     console.log('In OnInit');
-    this.traderService.getAllTraders().subscribe((traders: Traders[]) => { 
-      this.traders = traders;
-      console.log(this.traders);
-    });
+    this.getProductList().subscribe((traders: Traders[]) => this.traders = traders);
+    console.log(this.traders);
+  }
+
+  getProductList() : Observable<Traders[]> {
+    return this.traderService.getAllTraders();
   }
 
   blockTrader(trader: Traders) {
-    trader.status = Status.INACTIVE;
-    this.traderService.updateTrader(trader).subscribe((trader: Traders) => {
-      console.log(trader);
+    this.traderService.setStatusTrader(trader.email, Status.INACTIVE).subscribe((result: boolean) => {
+      this.getProductList().subscribe((traders: Traders[]) => this.traders = traders);
+      console.log(result);
     })
   }
 
   unblockTrader(trader: Traders) {
-    trader.status = Status.ACTIVE;
-    this.traderService.updateTrader(trader).subscribe((trader: Traders) => {
-      console.log(trader);
+    this.traderService.setStatusTrader(trader.email, Status.ACTIVE).subscribe((result: boolean) => {
+      this.getProductList().subscribe((traders: Traders[]) => this.traders = traders);
+      console.log(result);
     })
   }
 
   deleteTrader(email: string) {
-    this.traderService.deleteTrader(email).subscribe();
+    this.traderService.deleteTrader(email).subscribe(() => {
+      this.getProductList().subscribe((traders: Traders[]) => this.traders = traders);
+      console.log("Deleting" + email);
+    });
+   
   }
 
 }

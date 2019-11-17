@@ -1,0 +1,36 @@
+<!-- Modal -->
+<form  [formGroup] ="userForm" (ngSubmit) = "onSubmitForm()" >
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                  <label for="id">Id</label>
+                  <input type="number" class="form-control" id="id" formControlName="id">
+                  <label for="traderId">traderId</label>
+                  <input type="email" class="form-control" id="traderId"  aria-describedby="emailHelp" formControlName="traderId">
+                  <label for="name">name</label>
+                  <input type="text" class="form-control" id="name" formControlName="name">
+             
+                  <label for="price">price</label>
+                  <input type="text" class="form-control" id="price" formControlName="price">
+             
+                  <label for="availableStock">availableStock</label>
+                  <input type="text" class="form-control" id="availableStock" formControlName="availableStock">
+             
+                  <label for="available">available</label>
+                  <input type="text" class="form-control" id="available" formControlName="available">
+        </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-danger w-50" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success w-50">Save changes</button>
+        </div>
+    </div>
+    </div>
+  </div>
+</form>

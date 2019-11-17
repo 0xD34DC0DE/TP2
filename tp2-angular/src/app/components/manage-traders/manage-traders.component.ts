@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Traders } from 'src/app/models/account';
+import { Traders, AccountInter } from 'src/app/models/account';
 import { TraderService } from 'src/app/services/trader.service';
 import { Status } from 'src/app/models/status-enum';
 import { Observable } from 'rxjs';
@@ -15,13 +15,26 @@ export class ManageTradersComponent implements OnInit {
   imageWidth: number = 55;
   imageMargin: number = 2;
 
-  traders: Traders[];
+  traders: AccountInter[] = [
+    {
+      'email': 'quick@mail.com',
+      'firstName':'emerick',
+      'lastName':'benlie',
+      'address':'67 emly street',
+      'phone':'514-366-8978',
+      'type': 'TRADER',
+      'roles':['client'],
+      'status':Status.ACTIVE
+  }
+];
+
+currentTraderToEdit: AccountInter = this.traders[0];
 
   constructor(private traderService: TraderService) { }
 
   ngOnInit(): void {
     console.log('In OnInit');
-    this.getProductList().subscribe((traders: Traders[]) => this.traders = traders);
+ //   this.getProductList().subscribe((traders: Traders[]) => this.traders = traders);
     console.log(this.traders);
   }
 
@@ -51,4 +64,11 @@ export class ManageTradersComponent implements OnInit {
    
   }
 
+  changeCurrentTraderToEdit(trader:AccountInter){
+    console.log(trader);
+    
+    this.currentTraderToEdit = trader;
+  }
+
+  
 }

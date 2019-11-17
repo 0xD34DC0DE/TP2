@@ -20,6 +20,9 @@ import { ManageAdminComponent } from './components/manage-admin/manage-admin.com
 import { ManageTradersComponent } from './components/manage-traders/manage-traders.component';
 import { ManageProductsComponent } from './components/manage-products/manage-products.component';
 import { LogoutViewComponent } from './components/logout-view/logout-view.component';
+import { TraderManageProductComponent } from './components/trader-manage-product/trader-manage-product.component';
+import { ProductEditComponent } from './components/product-edit/product-edit.component';
+import { TraderEditComponent } from './components/trader-edit/trader-edit.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { LogoutViewComponent } from './components/logout-view/logout-view.compon
     ManageTradersComponent,
     ManageProductsComponent,
     LogoutViewComponent,
+    TraderManageProductComponent,
+    ProductEditComponent,
+    TraderEditComponent,
   ],
   imports: [
     BrowserModule,

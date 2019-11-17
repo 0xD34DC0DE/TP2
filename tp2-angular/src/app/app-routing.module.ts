@@ -11,6 +11,7 @@ import { ManageAdminComponent } from './components/manage-admin/manage-admin.com
 import { ManageProductsComponent } from './components/manage-products/manage-products.component';
 import { ManageTradersComponent } from './components/manage-traders/manage-traders.component';
 import { LogoutViewComponent } from './components/logout-view/logout-view.component';
+import { TraderManageProductComponent } from './components/trader-manage-product/trader-manage-product.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path:'logout',component: LogoutViewComponent},
   {path:'acceuil',component: AcceuilComponent},
   {path:'catalogue',component: AcceuilComponent},
+  {path:'tradermanageproducts',component: TraderManageProductComponent},
   {path:'profile',component: ProfileComponent},
   {path:'managing',component: ManagingComponent},
   {path:'manageadmin',component: ManageAdminComponent},

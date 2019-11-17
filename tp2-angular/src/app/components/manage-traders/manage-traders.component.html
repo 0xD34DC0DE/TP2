@@ -24,7 +24,7 @@
                   <td>{{ trader.lastName }}</td>
                   <td>{{ trader.address }}</td>
                   <td>{{ trader.status }}</td>
-                  <td><button class="btn btn-success">Edit</button></td>
+                  <td><button class="btn btn-success" (click)="changeCurrentTraderToEdit(product)" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
                   <td *ngIf="trader.status == 'ACTIVE'"><button (click)="blockTrader(trader)" class="btn btn-warning">Block</button></td>
                   <td *ngIf="trader.status == 'INACTIVE'">   <button (click)="unblockTrader(trader)" class="btn btn-warning">Unblock</button></td>
                   <td><button (click)="deleteTrader(trader.email)" class="btn btn-danger">Delete</button></td>
@@ -32,6 +32,7 @@
               </tbody>
             </table>
           </div>
+          <app-trader-edit [trader] ="currentTraderToEdit"></app-trader-edit>
           <div class="row">
               <hr>
               <a routerLink="/managing" class="btn btn-primary">Go back</a>

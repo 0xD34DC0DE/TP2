@@ -6,3 +6,12 @@ export interface Product{
     availableStock:string;
     available:boolean;
 }
+
+export class editProductForm{
+    constructor(private id:number,
+        private traderId:string,
+        private name:string,
+        private price:number,
+        private availableStock:string,
+        private available:boolean){}
+}

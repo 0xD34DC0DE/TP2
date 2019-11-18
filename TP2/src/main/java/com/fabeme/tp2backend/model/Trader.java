@@ -1,6 +1,9 @@
 package com.fabeme.tp2backend.model;
 
+import com.fabeme.tp2backend.message.request.TraderUpdateForm;
+
 import javax.persistence.*;
+import java.lang.reflect.Array;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -22,6 +25,10 @@ public class Trader extends Account {
 	public Trader(Account account) {
 		super(account.email, account.password, account.lastName, account.firstName, account.address, account.phone);
 		super.roles = account.roles;
+	}
+
+	public Trader(TraderUpdateForm form) {
+		super(form.getEmail(), form.getPassword(), form.getLastName(), form.getFirstName(), form.getAddress(), form.getPhone());
 	}
 
 	public Set<Product> getProducts() {

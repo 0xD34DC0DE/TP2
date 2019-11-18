@@ -1,6 +1,7 @@
 package com.fabeme.tp2backend.resource;
 
 import com.fabeme.tp2backend.message.request.StatusForm;
+import com.fabeme.tp2backend.message.request.TraderUpdateForm;
 import com.fabeme.tp2backend.model.Product;
 import com.fabeme.tp2backend.model.Status;
 import com.fabeme.tp2backend.model.Trader;
@@ -8,6 +9,7 @@ import com.fabeme.tp2backend.repository.ProductRepository;
 import com.fabeme.tp2backend.repository.TraderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,9 @@ public class TraderResource {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @PostMapping("/add")
 	public Optional<Trader> create(@RequestBody final Trader trader) {
@@ -96,14 +101,65 @@ public class TraderResource {
 
     @PreAuthorize("@ownerService.isRecordOwner(authentication, #id) or hasRole('ROLE_ADMIN')")
 	@PutMapping("/{id}")
-    public Optional<Trader> update(@PathVariable final String id, @RequestBody final Trader trader) {
-        traderRepository.save(trader);
-        return traderRepository.findByEmail(trader.getEmail());
+    public Optional<Trader> update(@PathVariable final String id, @RequestBody final TraderUpdateForm traderForm) {
+
+        Trader updatedTrader = new Trader(traderForm);
+
+        Optional<Trader> originalTrader = traderRepository.findByEmail(traderForm.getEmail());
+        if(originalTrader.isPresent()) {
+            updatedTrader.setRoles(originalTrader.get().getRoles());
+
+            if(traderForm.getPassword() == null) {
+                updatedTrader.setPassword(originalTrader.get().getPassword());
+            } else {
+                updatedTrader.setPassword(encoder.encode(traderForm.getPassword()));
+            }
+
+
+            traderRepository.save(updatedTrader);
+
+            traderRepository.findByEmail(originalTrader.get().getEmail());
+        }
+        return Optional.empty();
     }
 
     @PreAuthorize("@ownerService.isRecordOwner(authentication, #id) or hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{id}")
     public void delete(@PathVariable final String id) {
         traderRepository.deleteByEmail(id);
+    }
+
+    @PreAuthorize("@ownerService.isRecordOwner(authentication, #id)")
+    @PutMapping("/{id}/products")
+    public Optional<Product> updateTraderProduct(@PathVariable final String id, @RequestBody final Product product) {
+       Optional<Trader> trader = traderRepository.findByEmail(id);
+
+       if(trader.isPresent()) {
+           // Check if the ID of the product is one from the list of products from this trader
+           Optional<Product> productFromTrader = trader.get().getProducts().stream().filter(p -> p.getId().equals(product.getId())).findFirst();
+
+           if(productFromTrader.isPresent()) {
+               // Override the isAvailable property (this is because still don't know hoe to do a partial update and im running out of time
+               product.setAvailable(productFromTrader.get().isAvailable());
+
+               productRepository.save(product);
+               return productRepository.findById(product.getId());
+           }
+       }
+       return Optional.empty();
+    }
+
+
+    @PreAuthorize("@ownerService.isRecordOwner(authentication, #id) or hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/{id}/products/{prodId}")
+    public void delete(@PathVariable final String id, @PathVariable final String prodId) {
+        Optional<Trader> trader = traderRepository.findByEmail(id);
+
+        if(trader.isPresent()) {
+            // Check if the ID of the product is one from the list of products from this trader
+            Optional<Product> productFromTrader = trader.get().getProducts().stream().filter(p -> p.getId().toString().equals(prodId)).findFirst();
+
+            productFromTrader.ifPresent(product -> productRepository.delete(product));
+        }
     }
 }

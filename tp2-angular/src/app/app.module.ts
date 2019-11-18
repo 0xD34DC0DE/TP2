@@ -16,13 +16,14 @@ import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ManagingComponent } from './components/managing/managing.component';
-import { ManageAdminComponent } from './components/manage-admin/manage-admin.component';
 import { ManageTradersComponent } from './components/manage-traders/manage-traders.component';
 import { ManageProductsComponent } from './components/manage-products/manage-products.component';
 import { LogoutViewComponent } from './components/logout-view/logout-view.component';
 import { TraderManageProductComponent } from './components/trader-manage-product/trader-manage-product.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { TraderEditComponent } from './components/trader-edit/trader-edit.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
+import { UpdateTraderComponent } from './components/update-trader/update-trader.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +37,14 @@ import { TraderEditComponent } from './components/trader-edit/trader-edit.compon
     FooterComponent,
     ProfileComponent,
     ManagingComponent,
-    ManageAdminComponent,
     ManageTradersComponent,
     ManageProductsComponent,
     LogoutViewComponent,
     TraderManageProductComponent,
     ProductEditComponent,
     TraderEditComponent,
+    NewProductComponent,
+    UpdateTraderComponent,
   ],
   imports: [
     BrowserModule,

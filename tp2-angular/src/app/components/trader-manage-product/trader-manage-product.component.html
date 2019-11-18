@@ -1,37 +1,46 @@
 <div class='card'>
-    <div class='card-header'>
-      {{pageTitle}}
-    </div>
-    <div class='card-body'>
-      
-      <div class='table-responsive'>
-        <table class='table' *ngIf='products && products.length'>
-          <thead>
-            <tr>
-              <th>ProductId</th>
-              <th>name</th>
-              <th>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor='let product of products'>
-              <td>{{ product.id }}</td>
-              <td>{{ product.name }}</td>
-              <td>{{ product.price | currency:'CAD':'symbol':'1.2-2'}}</td>
-              
-              <td><button class="btn btn-success" (click)="changeCurrentProductToEdit(product)" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
-              <td><button class="btn btn-danger" (click) = "deleteMethod()">Delete</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <app-product-edit [product] ="currentProductToEdit"></app-product-edit>
-      <div class="row">
-          <hr>
-          <a routerLink="/managing" class="btn btn-primary">Go back</a>
-          <hr>
-      </div>
-    </div>
-  
+  <div class='card-header'>
+    {{pageTitle}}
   </div>
+  <div class='card-body'>
+
+    <button class="btn btn-success" (click)="showNewProductModal()" data-toggle="modal" data-target="#newProductModal">New Product</button>
+    <br><br>
+
+    <div class='table-responsive'>
+      <table class='table' *ngIf='products && products.length'>
+        <thead>
+          <tr>
+            <th>ProductId</th>
+            <th>name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Hidden</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let product of products'>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price | currency:'CAD':'symbol':'1.2-2'}}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.hidden }}</td>
+
+            <td><button class="btn btn-success" (click)="changeCurrentProductToEdit(product)" data-toggle="modal"
+                data-target="#exampleModal">Edit</button></td>
+            <td><button class="btn btn-danger" (click)="deleteMethod(product)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <app-product-edit *ngIf="currentProductToEdit" [product]="currentProductToEdit"></app-product-edit>
+    <app-new-product *ngIf="isNewProductModalActive"></app-new-product>
+    <div class="row">
+      <hr>
+      <a routerLink="/managing" class="btn btn-primary">Go back</a>
+      <hr>
+    </div>
+  </div>
+
+</div>

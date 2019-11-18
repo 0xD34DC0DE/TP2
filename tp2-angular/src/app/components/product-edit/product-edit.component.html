@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form  [formGroup] ="userForm" (ngSubmit) = "onSubmitForm()" >
+<form *ngIf="product" [formGroup] ="userForm" (ngSubmit) = "onSubmitForm()" >
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -9,22 +9,24 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div [formGroup]="userForm" class="modal-body">
                   <label for="id">Id</label>
-                  <input type="number" class="form-control" id="id" formControlName="id">
-                  <label for="traderId">traderId</label>
-                  <input type="email" class="form-control" id="traderId"  aria-describedby="emailHelp" formControlName="traderId">
-                  <label for="name">name</label>
+                  <input [readonly]="true" type="number" class="form-control" id="id" formControlName="id">
+
+                  <label for="name">Name</label>
                   <input type="text" class="form-control" id="name" formControlName="name">
              
-                  <label for="price">price</label>
+                  <label for="price">Price</label>
                   <input type="text" class="form-control" id="price" formControlName="price">
              
-                  <label for="availableStock">availableStock</label>
-                  <input type="text" class="form-control" id="availableStock" formControlName="availableStock">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control" id="description" formControlName="description">
              
-                  <label for="available">available</label>
-                  <input type="text" class="form-control" id="available" formControlName="available">
+                  <label for="hidden">Hidden</label>
+                  <select class="form-control" id="hidden" required formControlName="hidden" [value]="product.hidden ? true : false">
+                    <option [value]="true">True</option>
+                    <option [value]="false">False</option>
+                  </select>
         </div>
         <div class="modal-footer">
                 <button type="button" class="btn btn-danger w-50" data-dismiss="modal">Close</button>

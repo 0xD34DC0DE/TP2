@@ -1,15 +1,14 @@
-import { Cart } from './cart';
 import { Status } from './status-enum';
 
 export class Account{
-    email:string;
-    firstName:string;
-    lastName:string;
-    address:string;
-    phone:string;
-    type:string;
-    roles: string[];
-    status:Status;
+    constructor(public email:string,
+        public firstName:string,
+        public lastName:string,
+        public address:string,
+        public phone:string,
+        public roles: string[],
+        public status: Status,
+        public password?: string) {}
 }
 export interface AccountInter{
     email:string;
@@ -30,7 +29,10 @@ export class AccountForm{
         private phone:string){}
 }
 
-export interface Traders extends Account{
-    cart:Cart;
-    balance:number;
+export class AccountUpdateForm{
+    constructor(
+        private firstName:string,
+        private lastName:string,
+        private address:string,
+        private phone:string){}
 }

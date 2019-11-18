@@ -1,5 +1,7 @@
 package com.fabeme.tp2backend.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -17,6 +19,17 @@ public class Role {
     private RoleName name;
 
     public Role() {}
+
+    @JsonCreator
+    public Role(@JsonProperty("roles") String role) {
+
+        if(role.equals(RoleName.ROLE_TRADER.toString())) {
+            this.name = RoleName.ROLE_TRADER;
+        } else if(role.equals(RoleName.ROLE_ADMIN.toString())) {
+            this.name = RoleName.ROLE_ADMIN;
+        }
+
+    }
 
     public Role(RoleName name) {
         this.name = name;

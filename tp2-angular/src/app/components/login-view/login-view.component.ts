@@ -31,7 +31,6 @@ export class LoginViewComponent implements OnInit {
       formValue['email'],
       formValue['password']
     );
-    console.log(newUser);
 
     this.authService.login(formValue['email'], formValue['password']).subscribe((success: boolean) => {
       if (success) {

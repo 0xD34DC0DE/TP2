@@ -1,0 +1,36 @@
+<!-- Modal -->
+<form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
+    <div class="modal fade" id="newProductModal" tabindex="-1" role="dialog" aria-labelledby="newProductModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newProductModal">New product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div [formGroup]="userForm" class="modal-body">
+
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name">
+
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" id="price" formControlName="price">
+
+                    <label for="availableStock">Available Stock</label>
+                    <input type="text" class="form-control" id="availableStock" formControlName="availableStock">
+
+                    <label for="hidden">Hidden</label>
+                    <select class="form-control" id="hidden" formControlName="hidden">
+                        <option [value]="true">True</option>
+                        <option [value]="false">False</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger w-50" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success w-50">Create Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

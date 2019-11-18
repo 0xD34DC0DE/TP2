@@ -1,9 +1,9 @@
 package com.fabeme.tp2backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "relationClass" })
@@ -19,10 +19,12 @@ public class Product {
 	private String name;
 
 	private double price;
-	@Column(name = "available_stock", columnDefinition = "integer default 100")
-	private int availableStock = 100;
+	@Column(name = "available_stock")
+	private String description = "";
 
 	private boolean available = true;
+
+	private boolean hidden = false;
 
 	public Product() {
 	}
@@ -31,8 +33,9 @@ public class Product {
 		this.id = product.getId();
 		this.name = product.getName();
 		this.price = product.getPrice();
-		this.availableStock = product.getAvailableStock();
-		this.available = product.available;
+		this.description = product.getDescription();
+		this.available = product.isAvailable();
+		this.hidden = product.isHidden();
 	}
 
 	public Integer getId() {
@@ -59,12 +62,12 @@ public class Product {
 		this.price = price;
 	}
 
-	public int getAvailableStock() {
-		return availableStock;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setAvailableStock(int availableStock) {
-		this.availableStock = availableStock;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public boolean isAvailable() {
@@ -75,17 +78,13 @@ public class Product {
 		this.available = available;
 	}
 
+	public boolean isHidden() { return hidden; }
+
+	public void setHidden(boolean hidden) { this.hidden = hidden; }
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + availableStock;
-		long temp;
-		temp = Double.doubleToLongBits(price);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		return Objects.hash(id, name, price, description, available, hidden);
 	}
 
 	@Override
@@ -97,7 +96,7 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		if (availableStock != other.availableStock)
+		if (description != other.description)
 			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
@@ -117,7 +116,7 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [productId=" + id + ", productName=" + name + ", price=" + price
-				+ ", availableStock=" + availableStock + "]";
+				+ ", availableStock=" + description + "]";
 	}
 
 }

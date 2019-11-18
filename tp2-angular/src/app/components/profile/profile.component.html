@@ -1,1 +1,41 @@
-<p>profile works!</p>
+<div class='card'>
+    <div class='card-header'>
+        {{pageTitle}}
+    </div>
+    <div class='card-body'>
+
+        <button class="btn btn-success" (click)="showEditor()" data-toggle="modal"
+            data-target="#updateTrader">Update Info</button>
+        <br><br>
+
+        <div class='table-responsive'>
+            <table class='table' *ngIf='account'>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>First name</th>
+                        <th>Last Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ account.email }}</td>
+                        <td>{{ account.firstName }}</td>
+                        <td>{{ account.lastName}}</td>
+                        <td>{{ account.address }}</td>
+                        <td>{{ account.phone }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <app-update-trader *ngIf="accountToEdit" [account]="accountToEdit"></app-update-trader>
+        <div class="row">
+            <hr>
+            <button class="btn btn-danger" (click)="deleteAccount()">Delete Account</button>
+            <hr>
+        </div>
+    </div>
+
+</div>

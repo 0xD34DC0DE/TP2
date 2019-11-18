@@ -1,17 +1,24 @@
-export interface Product{
+export interface Product {
     id:number;
     traderId:string;
     name:string;
     price:number;
-    availableStock:string;
-    available:boolean;
+    description:string;
+    hidden:boolean;
 }
 
 export class editProductForm{
     constructor(private id:number,
-        private traderId:string,
         private name:string,
         private price:number,
-        private availableStock:string,
-        private available:boolean){}
+        private description:string,
+        private hidden:boolean){}
+}
+
+export class NewProduct {
+    constructor(
+        private name:string,
+        private price:number,
+        private description:string,
+        private hidden:boolean){}
 }

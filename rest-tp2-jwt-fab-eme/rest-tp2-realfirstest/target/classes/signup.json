@@ -1,9 +1,0 @@
-{
-	"firstName":"toto",
-	"lastName":"toto",
-	"email":"toto@mail.com",
-	"phone":"4689954875",
-	"role":["admin","client"],
-	"password":"toto123",
-	"adresse":"totoadresse"
-}

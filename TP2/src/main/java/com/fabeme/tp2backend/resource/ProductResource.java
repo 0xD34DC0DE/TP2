@@ -37,7 +37,7 @@ public class ProductResource {
 
     @GetMapping("/allAvailable")
     public Product[] findAllAvailable() {
-        return productRepository.findAllByAvailableTrue();
+        return productRepository.findAllByAvailableTrueAndHiddenFalse();
     }
 	
 	@PutMapping("/load")

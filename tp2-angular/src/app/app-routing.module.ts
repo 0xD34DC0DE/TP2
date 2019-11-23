@@ -7,10 +7,10 @@ import { LoginViewComponent } from './components/login-view/login-view.component
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ManagingComponent } from './components/managing/managing.component';
-import { ManageProductsComponent } from './components/manage-products/manage-products.component';
-import { ManageTradersComponent } from './components/manage-traders/manage-traders.component';
 import { LogoutViewComponent } from './components/logout-view/logout-view.component';
 import { TraderManageProductComponent } from './components/trader-manage-product/trader-manage-product.component';
+import { ManageProductsComponent } from './components/managing/manage-products/manage-products.component';
+import { ManageTradersComponent } from './components/managing/manage-traders/manage-traders.component';
 
 
 const routes: Routes = [

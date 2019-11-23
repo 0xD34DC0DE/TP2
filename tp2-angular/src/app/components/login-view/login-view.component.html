@@ -1,17 +1,16 @@
-<div id="outerDiv">
-  <p class="animated infinite pulse slow text-center">See our new offers</p>
-  <div id="innerDiv">
-
+<form class="mat-app-background basic-container" [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
+  <div class="example-container">
+    <h1 class="text-center text-secondary mt-0">Log in</h1>
     <hr>
-    <h1 class="text-center">Log in</h1>
-    <hr>
-    <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
-      <label for="email">Email</label>
-      <input class="animated  pulse fast" type="text" id="email" formControlName="email">
-      <label for="password">Password</label>
-      <input type="password" class="animated pulse fast" id="password" formControlName="password">
 
-      <input type="submit" class="animated swing fast" id="submit" value="Log In" [disabled]="userForm.invalid">
-    </form>
+    <mat-form-field class="w-75">
+      <input matInput placeholder="Email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="w-75">
+      <input class="w-50" matInput placeholder="Password" formControlName="password">
+    </mat-form-field>
+    <mat-checkbox primary class="w-75 mt-2">Remember me</mat-checkbox>
+
+    <button mat-raised-button class="w-50 mt-4 text-secondary btn-block" [disabled]="userForm.invalid">Sign In</button>
   </div>
-</div>
+</form>

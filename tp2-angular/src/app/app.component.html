@@ -18,9 +18,12 @@
     </ul>
   </div>
 </nav>
-<div class="w-100">
-  <router-outlet></router-outlet>
+<div class="w-100 vite" id="page-container">
+  <div id="content-wrap">
+
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<app-footer></app-footer>
+<app-footer id="footer"></app-footer>
 
 <!--*ngIf="isConnected() && isRole('ROLE_ADMIN')"-->

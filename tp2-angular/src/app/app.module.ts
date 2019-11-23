@@ -16,14 +16,17 @@ import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ManagingComponent } from './components/managing/managing.component';
-import { ManageTradersComponent } from './components/manage-traders/manage-traders.component';
-import { ManageProductsComponent } from './components/manage-products/manage-products.component';
+import { ManageTradersComponent } from './components/managing/manage-traders/manage-traders.component';
+import { ManageProductsComponent } from './components/managing/manage-products/manage-products.component';
 import { LogoutViewComponent } from './components/logout-view/logout-view.component';
 import { TraderManageProductComponent } from './components/trader-manage-product/trader-manage-product.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { TraderEditComponent } from './components/trader-edit/trader-edit.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { UpdateTraderComponent } from './components/update-trader/update-trader.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DemoMaterialModule } from 'src/material-module';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,8 @@ import { UpdateTraderComponent } from './components/update-trader/update-trader.
     ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
+    DemoMaterialModule,
+    MatNativeDateModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {
@@ -61,7 +66,8 @@ import { UpdateTraderComponent } from './components/update-trader/update-trader.
         whitelistedDomains: ["localhost:8081"],
         blacklistedRoutes: ["localhost:8081/api/auth/signin", "localhost:8081/api/auth/signup"]
       }
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

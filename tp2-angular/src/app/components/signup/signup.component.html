@@ -1,23 +1,98 @@
-<div id="outerDiv">
-  <p class="animated infinite pulse slow text-center">See our new offers</p>
+<div class="card m-3">
+  <h1 class="text-center text-secondary">CREATE A NEW ACCOUNT</h1>
   <hr>
-  <h1 class="text-center animated bounceIn fast">CREATE A NEW ACCOUNT</h1>
-  <hr>
-  <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
-    <label for="firstName">Prenom</label>
-    <input type="text" class="form-control animated  pulse fast" id="firstName"
-      formControlName="firstName">
-    <label for="lastName">Nom</label>
-    <input type="text" class="form-control animated  pulse fast" id="lastName" formControlName="lastName">
-    <label for="email">email</label>
-    <input type="text" class="form-control animated  pulse fast" id="email" formControlName="email">
-    <label for="password">password</label>
-    <input type="password" class="form-control animated pulse fast" id="password" formControlName="password">
-    <label for="adresse">adresse</label>
-    <input type="text" class="form-control animated  pulse fast" id="adresse" formControlName="adresse">
-    <label for="phone">phone</label>
-    <input type="text" class="form-control animated pulse fast" id="phone" formControlName="phone">
+  <div class="card-body">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Title</label>
+          <select formControlName="title" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+            <option value=""></option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Miss">Miss</option>
+            <option value="Ms">Ms</option>
+          </select>
+          <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+            <div *ngIf="f.title.errors.required">Title is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>First Name</label>
+          <input type="text" formControlName="firstName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+          </div>
+        </div>
+      </div>
 
-    <button class="text-center animated swing slow" type="submit" [disabled]="userForm.invalid">Soumettre</button>
-  </form>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" formControlName="email" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label>Adresse</label>
+          <input type="text" formControlName="adresse" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.adresse.errors }" />
+          <div *ngIf="submitted && f.adresse.errors" class="invalid-feedback">
+            <div *ngIf="f.adresse.errors.required">Adress is required</div>
+          </div>
+        </div>
+        <div class="form-group col-6">
+          <label>Phone</label>
+          <input type="text" formControlName="phone" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+          <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+            <div *ngIf="f.phone.errors.required">Phone is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+        </div>
+        <div class="form-group col">
+          <label>Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input"
+          [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+        <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+        <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary mr-1">Register</button>
+        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>

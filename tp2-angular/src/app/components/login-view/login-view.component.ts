@@ -25,6 +25,12 @@ export class LoginViewComponent implements OnInit {
     });
   }
 
+  getErrorMessage() {
+    return this.userForm.controls['email'].hasError('required') ? 'You must enter a value' :
+        this.userForm.controls['email'].hasError('email') ? 'Not a valid email' :
+            '';
+  }
+
   onSubmitForm() {
     const formValue = this.userForm.value;
     const newUser = new SignInForm(

@@ -24,12 +24,12 @@ public class Admin extends Account {
 
 	public Admin() {}
 
-	public Admin(String email, String password, String lastName, String firstName, String address, String phone) {
-		super(email, password, lastName, firstName, address, phone);
+	public Admin(String email, String password, String lastName, String firstName, String phone) {
+		super(email, password, lastName, firstName, phone);
 	}
 
 	public Admin(Account account, String level) {
-		super(account.email, account.password, account.lastName, account.firstName, account.address, account.phone);
+		super(account.email, account.password, account.lastName, account.firstName, account.phone);
 		this.adminLevel = level;
 	}
 
@@ -41,8 +41,8 @@ public class Admin extends Account {
 			@JsonProperty("firstName") String firstName,
 			@JsonProperty("address") String address,
 			@JsonProperty("phone") String phone,
-			@JsonProperty("roles") String[] roles) {
-		super(email, password, lastName, firstName, address, phone);
+			@JsonProperty("role") String role) {
+		super(email, password, lastName, firstName, phone);
 	}
 
 	public String getAdminLevel() { return adminLevel; }

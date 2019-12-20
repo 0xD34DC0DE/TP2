@@ -82,11 +82,10 @@ public class AuthRestAPIs {
 		Account user;
 		// Creating user's account
 		user = new Account(signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()),
-				signUpRequest.getLastName(), signUpRequest.getFirstName(), signUpRequest.getAddress(),
-				signUpRequest.getPhone());
+				signUpRequest.getLastName(), signUpRequest.getFirstName(), signUpRequest.getPhone());
 
 		// TRANSFERRING ACCOUNT ROLES STRING TO ENUM deez caps tho
-		Set<String> requestRolesArr = signUpRequest.getRole();
+		Set<String> requestRolesArr = Collections.singleton(signUpRequest.getRole());
 		Set<Role> userRoles = new HashSet<>();
 
 		if(requestRolesArr != null) {

@@ -18,17 +18,17 @@ public class Trader extends Account {
 
 	public Trader() {}
 
-	public Trader(String email, String password, String lastName, String firstName, String address, String phone) {
-		super(email, password, lastName, firstName, address, phone);
+	public Trader(String email, String password, String lastName, String firstName, String phone) {
+		super(email, password, lastName, firstName, phone);
 	}
 
 	public Trader(Account account) {
-		super(account.email, account.password, account.lastName, account.firstName, account.address, account.phone);
+		super(account.email, account.password, account.lastName, account.firstName, account.phone);
 		super.roles = account.roles;
 	}
 
 	public Trader(TraderUpdateForm form) {
-		super(form.getEmail(), form.getPassword(), form.getLastName(), form.getFirstName(), form.getAddress(), form.getPhone());
+		super(form.getEmail(), form.getPassword(), form.getLastName(), form.getFirstName(), form.getPhone());
 	}
 
 	public Set<Product> getProducts() {

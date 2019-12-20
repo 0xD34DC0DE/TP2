@@ -3,7 +3,7 @@ package com.fabeme.tp2backend.model;
 import com.fabeme.tp2backend.message.request.TraderUpdateForm;
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -15,6 +15,10 @@ public class Trader extends Account {
 	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(columnDefinition = "email", referencedColumnName = "email")
 	private Set<Product> products = new TreeSet<Product>();
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "inventory_id", referencedColumnName = "id")
+	private Inventory inventory = new Inventory();
 
 	public Trader() {}
 
@@ -35,11 +39,15 @@ public class Trader extends Account {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	public void setProducts(List<Product> products) {
+		this.inventory.setProducts(products);
+		//this.products = products;
 	}
 
-	public void addProducts(Set<Product> products) { this.products.addAll(products); }
+	public void addProducts(Set<Product> products) {
+		this.inventory.addProducts((List<Product>) products);
+		this.products.addAll(products);
+	}
 
 	public void addProduct(Product product) { this.products.add(product); }
 

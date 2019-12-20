@@ -1,9 +1,8 @@
 {
   "email": "admin@tp2.com",
-  "address": "nowhere",
   "firstName": "The",
   "lastName": "Admin",
   "password": "reallyStrongPassword",
   "phone": "123-456-7890",
-  "roles": ["admin"]
+  "role": "admin"
 }

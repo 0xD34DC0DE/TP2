@@ -15,7 +15,6 @@ public class Account {
 	protected String password;
 	protected String lastName;
 	protected String firstName;
-	protected String address;
 	protected String phone;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles",
@@ -28,12 +27,11 @@ public class Account {
 
 	public Account() {}
 
-	public Account(String email, String password, String lastName, String firstName, String address, String phone) {
+	public Account(String email, String password, String lastName, String firstName, String phone) {
 		this.email = email;
 		this.password = password;
 		this.lastName = lastName;
 		this.firstName = firstName;
-		this.address = address;
 		this.phone = phone;
 	}
 
@@ -67,14 +65,6 @@ public class Account {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public String getPhone() {

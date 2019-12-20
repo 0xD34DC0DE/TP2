@@ -52,9 +52,9 @@ public class TraderResource {
         if(trader.isPresent()) {
             Trader currentTrader = trader.get();
 
-            productRepository.save(product);
+            productRepository.saveAndFlush(product);
 
-            Optional<Product> prod = productRepository.findByName(product.getName());
+            Optional<Product> prod = productRepository.findById(product.getId());
             if(prod.isPresent()){
                 currentTrader.addProduct(prod.get());
                 traderRepository.save(currentTrader);

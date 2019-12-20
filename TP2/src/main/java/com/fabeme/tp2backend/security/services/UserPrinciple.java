@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,22 +28,25 @@ public class UserPrinciple implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserPrinciple(String lastName, String firstName, String address, String phone, String email, String password,
+	public UserPrinciple(String lastName, String firstName, String email, String password,
                          Collection<? extends GrantedAuthority> authorities) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.address = address;
-		this.phone = phone;
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
 	}
 
 	public static UserPrinciple build(Account user) {
-		List<GrantedAuthority> authorities = user.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
+		/*List<GrantedAuthority> authorities = user.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());*/
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		user.getRoles().stream().findFirst().ifPresent((role -> {
+			authorities.add(new SimpleGrantedAuthority(role.getName().name()));
+		}));
 
-		return new UserPrinciple(user.getLastName(), user.getFirstName(), user.getAddress(), user.getPhone(),
+
+		return new UserPrinciple(user.getLastName(), user.getFirstName(),
 				user.getEmail(), user.getPassword(), authorities);
 	}
 

@@ -1,14 +1,14 @@
 package com.fabeme.tp2backend.resource;
 
-import com.fabeme.tp2backend.message.request.LoginForm;
-import com.fabeme.tp2backend.message.request.SignUpForm;
-import com.fabeme.tp2backend.message.response.JwtResponse;
-import com.fabeme.tp2backend.model.*;
-import com.fabeme.tp2backend.repository.AccountRepository;
-import com.fabeme.tp2backend.repository.AdminRepository;
-import com.fabeme.tp2backend.repository.RoleRepository;
-import com.fabeme.tp2backend.repository.TraderRepository;
-import com.fabeme.tp2backend.security.jwt.JwtProvider;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,25 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.*;
+import com.fabeme.tp2backend.message.request.LoginForm;
+import com.fabeme.tp2backend.message.request.SignUpForm;
+import com.fabeme.tp2backend.message.response.JwtResponse;
+import com.fabeme.tp2backend.model.Account;
+import com.fabeme.tp2backend.model.Admin;
+import com.fabeme.tp2backend.model.Role;
+import com.fabeme.tp2backend.model.RoleName;
+import com.fabeme.tp2backend.model.Trader;
+import com.fabeme.tp2backend.repository.AccountRepository;
+import com.fabeme.tp2backend.repository.AdminRepository;
+import com.fabeme.tp2backend.repository.RoleRepository;
+import com.fabeme.tp2backend.repository.TraderRepository;
+import com.fabeme.tp2backend.security.jwt.JwtProvider;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -73,7 +88,7 @@ public class AuthRestAPIs {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+	public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) throws RuntimeException {
 //
 		if (accountRepository.existsByEmail(signUpRequest.getEmail())) {
 			return new ResponseEntity<String>("Fail -> Email is already in use!", HttpStatus.BAD_REQUEST);

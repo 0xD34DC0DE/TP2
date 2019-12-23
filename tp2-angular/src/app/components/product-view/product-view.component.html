@@ -1,5 +1,5 @@
-<div class="col-lg-4 col-md-6 mb-4 col-sm-12" *ngFor="let product of productList">
-  <div class="card">
+<div class="col-lg-4 col-md-6 mb-4 col-sm-12"  *ngFor="let product of productList">
+  <div class="card" [ngStyle]=" !product.sold ? background-color:grey">
     <img class="card-img-top" src="./../../../assets/CafeGold.jpg" alt="Card image cap">
     <div class="overlay">
       <div class="text">{{product.description}}</div>
@@ -9,6 +9,8 @@
       <p class="mb-0">id#: {{product.id}}</p>
       <p class="mt-0">prix: {{product.price.toFixed(2)}}$</p>
       <p class="mt-0">Description: {{product.description}}</p>
+      <p class="mt-0">isSold: {{product.sold}}</p>
+      <button (click) ="sellProduct" class="btn-block" [disabled] = "product.sold" mat-raised-button color="primary">Buy</button>
     </div>
   </div>
 </div>

@@ -13,6 +13,7 @@ import { MustMatch } from 'src/must-match-validator';
 })
 export class SignupComponent implements OnInit {
   submitted = false;
+  creationSuccessful = true;
   userForm: FormGroup;
   roleSet: string[] = [
     'client',
@@ -67,15 +68,16 @@ export class SignupComponent implements OnInit {
       console.log(message);
       this.router.navigate(['/acceuil']);
     },error => {
+      this.creationSuccessful = true;
       if (error.error == 'Fail -> Email is already in use!') {
         alert('Email already in use');
       }
     }
     );
 
-
-    //this.userService.addUser(newUser);
-    //this.router.navigate(['/users']);
+    if (this.creationSuccessful) {
+      this.router.navigate(['/login']);
+    }
   }
 
   onReset() {

@@ -46,7 +46,7 @@ export class NewProductComponent implements OnInit {
         console.log(product);
         this.router.navigate(['/tradermanageproducts']);
       });
-
+      this.userForm.reset();
     }
   }
 }

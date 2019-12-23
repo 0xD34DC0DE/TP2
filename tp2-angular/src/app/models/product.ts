@@ -5,6 +5,7 @@ export interface Product {
     price:number;
     description:string;
     hidden:boolean;
+    sold:boolean;
 }
 
 export class editProductForm{

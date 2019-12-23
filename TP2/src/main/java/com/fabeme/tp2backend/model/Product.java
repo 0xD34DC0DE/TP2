@@ -26,6 +26,8 @@ public class Product {
 
 	private boolean hidden = false;
 
+	private boolean sold = false;
+
 	public Product() {
 	}
 
@@ -81,6 +83,10 @@ public class Product {
 	public boolean isHidden() { return hidden; }
 
 	public void setHidden(boolean hidden) { this.hidden = hidden; }
+
+	public boolean isSold() { return sold; }
+
+	public void setSold(boolean sold) { this.sold = sold; }
 
 	@Override
 	public int hashCode() {

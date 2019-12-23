@@ -18,7 +18,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ManagingComponent } from './components/managing/managing.component';
 import { ManageTradersComponent } from './components/managing/manage-traders/manage-traders.component';
 import { ManageProductsComponent } from './components/managing/manage-products/manage-products.component';
-import { LogoutViewComponent } from './components/logout-view/logout-view.component';
 import { TraderManageProductComponent } from './components/trader-manage-product/trader-manage-product.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { TraderEditComponent } from './components/trader-edit/trader-edit.component';
@@ -42,7 +41,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     ManagingComponent,
     ManageTradersComponent,
     ManageProductsComponent,
-    LogoutViewComponent,
     TraderManageProductComponent,
     ProductEditComponent,
     TraderEditComponent,

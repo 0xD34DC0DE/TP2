@@ -36,10 +36,9 @@ export class SignupComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      adresse: ['', Validators.required],
       phone: ['', Validators.required],
       acceptTerms: ['', Validators.required],
-      roles: [''],
+      role: [''],
     }, {
       validator: MustMatch('password', 'confirmPassword')
   });
@@ -60,15 +59,19 @@ export class SignupComponent implements OnInit {
       formValue['email'],
       formValue['password'],
       formValue['phone'],
-      ['trader'],
-      formValue['adresse']
+      'trader'
     );
     console.log(newUser);
 
     this.authService.signup(newUser).subscribe((message: string) => {
       console.log(message);
       this.router.navigate(['/acceuil']);
-    });
+    },error => {
+      if (error.error == 'Fail -> Email is already in use!') {
+        alert('Email already in use');
+      }
+    }
+    );
 
 
     //this.userService.addUser(newUser);

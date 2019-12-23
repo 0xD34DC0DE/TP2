@@ -8,7 +8,7 @@ import { TraderService } from 'src/app/services/trader.service';
   styleUrls: ['./manage-products.component.css']
 })
 export class ManageProductsComponent implements OnInit {
-  pageTitle: string = 'Liste des cochonneries';
+  pageTitle: string = 'Liste des products';
   imageWidth: number = 55;
   imageMargin: number = 2;
 

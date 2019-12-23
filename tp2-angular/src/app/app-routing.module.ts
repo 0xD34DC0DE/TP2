@@ -7,7 +7,6 @@ import { LoginViewComponent } from './components/login-view/login-view.component
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ManagingComponent } from './components/managing/managing.component';
-import { LogoutViewComponent } from './components/logout-view/logout-view.component';
 import { TraderManageProductComponent } from './components/trader-manage-product/trader-manage-product.component';
 import { ManageProductsComponent } from './components/managing/manage-products/manage-products.component';
 import { ManageTradersComponent } from './components/managing/manage-traders/manage-traders.component';
@@ -18,7 +17,6 @@ const routes: Routes = [
   {path:'catalogue',component: CatalogueComponent},
   {path:'signup',component: SignupComponent},
   {path:'login',component: LoginViewComponent},
-  {path:'logout',component: LogoutViewComponent},
   {path:'acceuil',component: AcceuilComponent},
   {path:'catalogue',component: AcceuilComponent},
   {path:'tradermanageproducts',component: TraderManageProductComponent},

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { Account } from '../models/account';
 import { environment } from 'src/environments/environment';
@@ -48,7 +48,7 @@ export class AuthenticationService {
   }
 
   signup(form: SignUpForm) : Observable<string> {
-    return this.http.post<string>(`${environment.authApiUrl}/signup`, form);
+    return this.http.post<string>(`${environment.authApiUrl}/signup`, form)
   }
 
   logout() {

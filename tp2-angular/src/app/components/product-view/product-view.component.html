@@ -9,8 +9,9 @@
       <p class="mb-0">id#: {{product.id}}</p>
       <p class="mt-0">prix: {{product.price.toFixed(2)}}$</p>
       <p class="mt-0">Description: {{product.description}}</p>
-      <p class="mt-0">isSold: {{product.sold}}</p>
-      <button (click) ="sellProduct" class="btn-block" [disabled] = "product.sold" mat-raised-button color="primary">Buy</button>
+      <p class="mt-0">Sold: {{product.sold ? "yes" : "no"}}</p>
+      <button *ngIf="!product.sold" (click) ="sellProduct(product.id)" class="btn-block" mat-raised-button color="primary">Buy</button>
+      <button *ngIf="product.sold"(click) ="returnProduct(product.id)" class="btn-block" mat-raised-button color="primary">Return</button>
     </div>
   </div>
 </div>

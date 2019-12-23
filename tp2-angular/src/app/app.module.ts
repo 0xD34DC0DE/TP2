@@ -26,6 +26,7 @@ import { UpdateTraderComponent } from './components/update-trader/update-trader.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from 'src/material-module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { LogoutViewComponent } from './components/logout-view/logout-view.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     TraderEditComponent,
     NewProductComponent,
     UpdateTraderComponent,
+    LogoutViewComponent,
   ],
   imports: [
     BrowserModule,

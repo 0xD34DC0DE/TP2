@@ -1,10 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Account } from 'src/app/models/account';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { TraderService } from 'src/app/services/trader.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentification.service';
-import { editProductForm } from 'src/app/models/product';
 
 @Component({
   selector: 'app-trader-edit',
@@ -14,6 +13,7 @@ import { editProductForm } from 'src/app/models/product';
 export class TraderEditComponent implements OnInit {
 
   userForm: FormGroup;
+  @Output() saved = new EventEmitter<boolean>();
   @Input() trader: Account;
   constructor(private formBuilder: FormBuilder,
     private traderService: TraderService,
@@ -25,20 +25,17 @@ export class TraderEditComponent implements OnInit {
   }
 
   initForm() {
-    console.log("Inside initForm")
+
     if (this.trader) {
       this.userForm = this.formBuilder.group({
         email: [this.trader.email, [Validators.required, Validators.email]],
         firstName: [this.trader.firstName, Validators.required],
         lastName: [this.trader.lastName, Validators.required],
-        address: [this.trader.address, Validators.required],
         phone: [this.trader.phone, Validators.required],
       });
-      console.log(this.userForm)
+
     }
   }
-
-
 
   onSubmitForm() {
     if (this.userForm.valid) {
@@ -47,14 +44,16 @@ export class TraderEditComponent implements OnInit {
         this.trader.email,
         formValue['firstName'],
         formValue['lastName'],
-        formValue['address'],
         formValue['phone'],
-        ['ROLE_TRADER'],
+        'trader',
         this.trader.status
       );
-
-      this.traderService.updateTrader(editedTrader).subscribe();
+      this.traderService.updateTrader(editedTrader).subscribe((acc: Account) => console.log(acc));
     }
+  }
+
+  updateTrader() {
+    this.saved.emit(true);
   }
 
 

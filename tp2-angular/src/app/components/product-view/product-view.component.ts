@@ -18,4 +18,16 @@ export class ProductViewComponent implements OnInit {
     })
   }
 
+  sellProduct(id: number) {
+    this.traderService.sellProduct(id).subscribe((product: Product) => {
+      this.productList.find(prod => prod.id === id).sold = product.sold;
+    })
+  }
+
+  returnProduct(id: number) {
+    this.traderService.returnProduct(id).subscribe((product: Product) => {
+      this.productList.find(prod => prod.id === id).sold = product.sold;
+    })
+  }
+
 }

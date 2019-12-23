@@ -21,16 +21,14 @@ export class TraderManageProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.traderService.getTraderProducts(localStorage.getItem('email')).subscribe((products: Product[]) => this.products = products);
+    this.traderService.getTraderUnsoldProducts(localStorage.getItem('email')).subscribe((products: Product[]) => this.products = products);
   }
 
   deleteMethod(product: Product) {
-    this.traderService.deleteProduct(localStorage.getItem('email'), product.id).subscribe();
+    this.traderService.deleteProduct(product.id, localStorage.getItem('email')).subscribe();
   }
 
   changeCurrentProductToEdit(product: Product) {
-    console.log(product);
-
     this.currentProductToEdit = product;
   }
 

@@ -25,7 +25,7 @@ export class NewProductComponent implements OnInit {
       this.userForm = this.formBuilder.group({
         name: ['', Validators.required],
         price: ['', Validators.required],
-        availableStock: ['', Validators.required],
+        description: ['', Validators.required],
         hidden: ['', Validators.required],
       });
   
@@ -38,15 +38,15 @@ export class NewProductComponent implements OnInit {
       const newProduct = new NewProduct(
         formValue['name'],
         formValue['price'],
-        formValue['availableStock'],
+        formValue['description'],
         formValue['hidden']
       );
 
       this.traderService.createProduct(localStorage.getItem('email'), newProduct).subscribe((product: Product) => {
-        console.log(product);
+
         this.router.navigate(['/tradermanageproducts']);
       });
-      this.userForm.reset();
+
     }
   }
 }

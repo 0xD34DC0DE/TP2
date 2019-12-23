@@ -29,6 +29,10 @@ export class TraderService {
     return this.http.get<Product[]>(`${environment.traderUrl}/${email}/products`);
   }
 
+  getTraderUnsoldProducts(email: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.traderUrl}/${email}/unsoldProducts`);
+  }
+
   getAllTraders(): Observable<Account[]> {
     return this.http.get<Account[]>(`${environment.traderUrl}/all`);
   }
@@ -45,8 +49,14 @@ export class TraderService {
     return this.http.delete<void>(`${environment.traderUrl}/${email}`);
   }
 
-  deleteProduct(email: string, id: number): Observable<void> {
-    return this.http.delete<void>(`${environment.traderUrl}/${email}/products/${id}`);
+  deleteProduct(id: number, email?: string): Observable<void> {
+    if(email) {
+      return this.http.delete<void>(`${environment.traderUrl}/${localStorage.getItem('email')}/products/${id}`);
+    } else {
+      //Delete the product direclty since we dont need an email when we are admin
+      return this.http.delete<void>(`${environment.productsUrl}/${id}`);
+    }
+   
   }
 
   updateProduct(email: string, product: editProductForm): Observable<Product> {
@@ -55,5 +65,13 @@ export class TraderService {
 
   createProduct(email: string, product: NewProduct): Observable<Product> {
     return this.http.post<Product>(`${environment.traderUrl}/${email}/products`, product);
+  }
+
+  sellProduct(id: number) : Observable<Product> {
+    return this.http.post<Product>(`${environment.productsUrl}/sell`, {id: id});
+  }
+
+  returnProduct(id: number) : Observable<Product> {
+    return this.http.post<Product>(`${environment.productsUrl}/return`, {id: id});
   }
 }

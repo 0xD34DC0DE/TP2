@@ -27,7 +27,6 @@ export class UpdateTraderComponent implements OnInit {
         email: [this.account.email, [Validators.required, Validators.email]],
         firstName: [this.account.firstName, Validators.required],
         lastName: [this.account.lastName, Validators.required],
-        address: [this.account.address, Validators.required],
         phone: [this.account.phone, Validators.required],
         password: [null, Validators.nullValidator]
       });
@@ -42,9 +41,8 @@ export class UpdateTraderComponent implements OnInit {
         this.account.email,
         formValue['firstName'],
         formValue['lastName'],
-        formValue['address'],
         formValue['phone'],
-        ['ROLE_TRADER'],
+        'ROLE_TRADER',
         this.account.status,
         formValue['password']
       );

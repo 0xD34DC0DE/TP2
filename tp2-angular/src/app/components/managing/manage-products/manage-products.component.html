@@ -12,7 +12,8 @@
                   <th>Product</th>
                   <th>Code</th>
                   <th>Price</th>
-                  <th>5 Star Rating</th>
+                  <th>Description</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,9 +28,8 @@
                   <td>{{ product.name }}</td>
                   <td>{{ product.id }}</td>
                   <td>{{ product.price | currency:'CAD':'symbol':'1.2-2'}}</td>
-                  
-                  <td><button class="btn btn-success">Edit</button></td>
-                  <td><button class="btn btn-danger">Delete</button></td>
+                  <td>{{ product.description }}</td>
+                  <td><button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button></td>
                 </tr>
               </tbody>
             </table>

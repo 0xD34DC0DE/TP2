@@ -10,7 +10,6 @@
             <th>Trader ID</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Addresse</th>
             <th>Status</th>
             <th colspan="3">Actions</th>
           </tr>
@@ -20,7 +19,6 @@
             <td>{{ trader.email}}</td>
             <td>{{ trader.firstName }}</td>
             <td>{{ trader.lastName }}</td>
-            <td>{{ trader.address }}</td>
             <td>{{ trader.status }}</td>
             <td><button class="btn btn-success" (click)="changeCurrentTraderToEdit(trader)" data-toggle="modal"
                 data-target="#exampleModal">Edit</button></td>
@@ -33,7 +31,7 @@
         </tbody>
       </table>
     </div>
-    <app-trader-edit *ngIf="currentTraderToEdit" [trader]="currentTraderToEdit"></app-trader-edit>
+    <app-trader-edit *ngIf="currentTraderToEdit" [trader]="currentTraderToEdit" (saved)="onSaved($event)"></app-trader-edit>
     <div class="row">
       <hr>
       <a routerLink="/managing" class="btn btn-primary">Go back</a>

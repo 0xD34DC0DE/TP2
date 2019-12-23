@@ -13,14 +13,13 @@
         <div class="modal-body">
           <label for="id">Id</label>
           <input [readonly]="true" type="email" class="form-control" id="id" formControlName="email">
+         
           <label for="firstName">firstName</label>
           <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp"
             formControlName="firstName">
+
           <label for="lastName">lastName</label>
           <input type="text" class="form-control" id="lastName" formControlName="lastName">
-
-          <label for="address">adress</label>
-          <input type="text" class="form-control" id="address" formControlName="address">
 
           <label for="phone">phone</label>
           <input type="phone" class="form-control" id="phone" formControlName="phone">
@@ -28,7 +27,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger w-50" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success w-50">Save changes</button>
+          <button type="submit" (click)="updateTrader()" class="btn btn-success w-50">Save changes</button>
         </div>
       </div>
     </div>

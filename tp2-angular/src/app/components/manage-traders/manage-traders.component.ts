@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Account, AccountInter } from 'src/app/models/account';
-import { TraderService } from 'src/app/services/trader.service';
-import { Status } from 'src/app/models/status-enum';
+import { Account, AccountInter } from './../../models/account';
+import { TraderService } from './../../services/trader.service';
+import { Status } from './../../models/status-enum';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -22,26 +22,25 @@ export class ManageTradersComponent implements OnInit {
   constructor(private traderService: TraderService) { }
 
   ngOnInit(): void {
-    console.log('In OnInit');
-    this.traderService.getAllTraders().subscribe((traders: Account[]) => this.traders = traders);
-    console.log(this.traders);
+    this.traderService.getAllTraders().subscribe((traders: Account[]) => this.traders = traders)
+
   }
 
   getTraderList(): Observable<Account[]> {
-    return this.traderService.getAllTraders()
+    return this.traderService.getAllTraders();
   }
 
   blockTrader(trader: Account) {
     this.traderService.setStatusTrader(trader.email, Status.INACTIVE).subscribe((result: boolean) => {
       this.getTraderList().subscribe((traders: Account[]) => this.traders = traders);
-      console.log(result);
+
     })
   }
 
   unblockTrader(trader: Account) {
     this.traderService.setStatusTrader(trader.email, Status.ACTIVE).subscribe((result: boolean) => {
       this.getTraderList().subscribe((traders: Account[]) => this.traders = traders);
-      console.log(result);
+
     })
   }
 
@@ -55,12 +54,6 @@ export class ManageTradersComponent implements OnInit {
 
   changeCurrentTraderToEdit(trader: Account) {
     this.currentTraderToEdit = trader;
-  }
-
-  onSaved(saved: boolean) {
-    if(saved) {
-     this.ngOnInit();
-    }
   }
 
 

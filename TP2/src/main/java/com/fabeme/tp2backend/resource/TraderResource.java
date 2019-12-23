@@ -77,8 +77,7 @@ public class TraderResource {
            Set<Product> products = tra.getProducts();
            Set<Product> updatedProducts = products.stream().map(product -> {
                product.setAvailable(active);
-               productRepository.save(product);
-               return productRepository.findById(product.getId()).get();
+               return product;
            }).collect(Collectors.toSet());;
 
            productRepository.saveAll(updatedProducts);
@@ -92,6 +91,18 @@ public class TraderResource {
     public Set<Product> getTraderProduct(@PathVariable final String id) {
         Optional<Trader> trader = traderRepository.findByEmail(id);
         return trader.map(Trader::getProducts).orElse(null);
+    }
+
+    @PreAuthorize("@ownerService.isRecordOwner(authentication, #id)")
+    @GetMapping("/{id}/unsoldProducts")
+    public Set<Product> getTraderUnsoldProduct(@PathVariable final String id) {
+        Optional<Trader> trader = traderRepository.findByEmail(id);
+        return trader.map(value -> value.getProducts()
+                .stream()
+                .filter((prod) -> {
+                    return !prod.isSold();
+                })
+                .collect(Collectors.toSet())).orElseGet(Set::of);
     }
 
 	@GetMapping("/all")
@@ -116,9 +127,9 @@ public class TraderResource {
             }
 
 
-            traderRepository.save(updatedTrader);
+            traderRepository.saveAndFlush(updatedTrader);
 
-            traderRepository.findByEmail(originalTrader.get().getEmail());
+            return Optional.of(updatedTrader);
         }
         return Optional.empty();
     }

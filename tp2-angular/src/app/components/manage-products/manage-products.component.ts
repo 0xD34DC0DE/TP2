@@ -8,7 +8,7 @@ import { TraderService } from 'src/app/services/trader.service';
   styleUrls: ['./manage-products.component.css']
 })
 export class ManageProductsComponent implements OnInit {
-  pageTitle: string = 'Liste des products';
+  pageTitle: string = 'Liste des cochonneries';
   imageWidth: number = 55;
   imageMargin: number = 2;
 
@@ -20,20 +20,11 @@ export class ManageProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('In OnInit');
+
     this.traderService.getAllProducts().subscribe((products: Product[]) => {
       this.products = products;
-      console.log(this.products);
+
     })
-  }
-
-  deleteProduct(id: number) {
-    this.traderService.deleteProduct( id).subscribe(() => {
-      this.traderService.getAllProducts().subscribe((products: Product[]) => {
-        this.products = products;
-      })
-    });
-
   }
 
 }

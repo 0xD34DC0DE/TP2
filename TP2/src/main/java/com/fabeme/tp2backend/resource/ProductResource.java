@@ -1,5 +1,6 @@
 package com.fabeme.tp2backend.resource;
 
+import com.fabeme.tp2backend.message.request.IdForm;
 import com.fabeme.tp2backend.model.Product;
 import com.fabeme.tp2backend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,31 @@ public class ProductResource {
 	@DeleteMapping("/{id}")
     public void update(@PathVariable final Integer id) {
         productRepository.deleteById(id);
+    }
+
+    @PostMapping("/sell")
+    public Optional<Product> sellProduct(@RequestBody final IdForm idForm) {
+        Optional<Product> product = productRepository.findById(idForm.getId());
+        if(product.isPresent()) {
+            Product prod = product.get();
+            prod.setSold(true);
+            productRepository.saveAndFlush(prod);
+            return Optional.of(prod);
+        }
+
+        return Optional.empty();
+    }
+
+    @PostMapping("/return")
+    public Optional<Product> returnProduct(@RequestBody final IdForm idForm) {
+        Optional<Product> product = productRepository.findById(idForm.getId());
+        if(product.isPresent()) {
+            Product prod = product.get();
+            prod.setSold(false);
+            productRepository.saveAndFlush(prod);
+            return Optional.of(prod);
+        }
+
+        return Optional.empty();
     }
 }

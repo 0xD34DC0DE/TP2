@@ -1,11 +1,11 @@
 TECHNOLOGIES:
--ANGULAR
--JAVA
--MYSQL
--SPRING BOOT
--SPRING SECURITY
--SPRING WEB
--JWT
+- ANGULAR
+- JAVA
+- MYSQL
+- SPRING BOOT
+- SPRING SECURITY
+- SPRING WEB
+- JWT
 
 The project is separated into a backend (java) and a frontend (Angular)
 This is a project made by two college students in the software engineer program
